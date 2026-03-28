@@ -108,8 +108,8 @@ openssl req -x509 -newkey rsa:2048 \
 | Variable | Default | Description |
 |---|---|---|
 | `PORT` | `3000` | Port the server listens on |
-| `API_KEY` | `g#7Kp!2Zx@L9$QvR` | Shared secret between frontend and backend — **change this** |
-| `FRONTEND_URL` | `https://neval.vercel.app` | Your frontend origin (for CORS) |
+| `API_KEY` | `YOURAPIKEY` | Shared secret between frontend and backend — **change this** |
+| `FRONTEND_URL` | `https://your-domain.com` | Your frontend origin (for CORS) |
 | `USE_HTTPS` | `true` | Set to `false` to run plain HTTP |
 
 
