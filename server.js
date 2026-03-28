@@ -26,12 +26,10 @@ const fs       = require('fs');
 const crypto   = require('crypto');
 const { v4: uuidv4 } = require('uuid');
 
-// ─── CONFIG ──────────────────────────────────────────────────────────────────
-
 const CONFIG = {
   port:        process.env.PORT        || 3000,
-  apiKey:      process.env.API_KEY     || 'g#7Kp!2Zx@L9$QvR',
-  frontendUrl: process.env.FRONTEND_URL || 'https://neval.vercel.app',
+  apiKey:      process.env.API_KEY     || 'YOURAPIKEY',
+  frontendUrl: process.env.FRONTEND_URL || 'https://your-domain.com',
   useHttps:    process.env.USE_HTTPS !== 'false',
   filesDir:    path.join(__dirname, 'files'),
   dbPath:      path.join(__dirname, 'db.json'),
@@ -40,11 +38,7 @@ const CONFIG = {
   keyPath:     path.join(__dirname, 'key.pem'),
 };
 
-// ─── INIT ────────────────────────────────────────────────────────────────────
-
 if (!fs.existsSync(CONFIG.filesDir)) fs.mkdirSync(CONFIG.filesDir, { recursive: true });
-
-// ─── DB HELPERS ──────────────────────────────────────────────────────────────
 
 function readDB() {
   try { return JSON.parse(fs.readFileSync(CONFIG.dbPath, 'utf8')); }
