@@ -1,0 +1,28 @@
+{
+  "users": [
+    {
+      "username": "valdoratorz",
+      "hash": "8a7743e2f15d7e6f922cedcbdcc47b6d010e4f63108be4ed866181c0a5582317",
+      "role": "owner",
+      "created": 1774649807133
+    },
+    {
+      "username": "gigzaz",
+      "hash": "53ae71cfd2ecbd8e90ff66c08cbe31874e65c0d0a6b7df878750c64b8fbd4ae1",
+      "role": "user",
+      "created": 1774697145844
+    },
+    {
+      "username": "nonofire",
+      "hash": "5ea84edaa91e34228534d1ca7da860903e7e449a41c28c8977363f4233ad4cbf",
+      "role": "user",
+      "created": 1774697254217
+    },
+    {
+      "username": "epsteinrapejews",
+      "hash": "0ef8092b1f4bad90ed4b34e74e538a1a0b8c4604ea1350d96af60333c66904b0",
+      "role": "user",
+      "created": 1774701983145
+    }
+  ]
+}
