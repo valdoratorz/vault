@@ -18,7 +18,7 @@
   --red:#f87171;--red-dim:rgba(248,113,113,0.12);
   --yellow:#fbbf24;--yellow-dim:rgba(251,191,36,0.08);
   --radius:12px;--radius-sm:7px;--transition:0.22s cubic-bezier(0.4,0,0.2,1);
-  --nav-w:240px; /* sidebar width */
+  --nav-w:220px;
 }
 html{scroll-behavior:smooth}
 body{background:var(--bg);color:var(--text);font-family:'Syne',sans-serif;min-height:100vh;overflow-x:hidden}
@@ -28,14 +28,12 @@ body::before{content:'';position:fixed;inset:0;background-image:url("data:image/
 .orb-2{width:300px;height:300px;background:rgba(91,79,255,0.05);bottom:-50px;left:-80px;animation-delay:-6s}
 @keyframes orbFloat{0%,100%{transform:translate(0,0) scale(1)}50%{transform:translate(20px,-30px) scale(1.05)}}
 
-/* ── SCREENS ── */
 .screen{position:fixed;inset:0;display:flex;align-items:center;justify-content:center;z-index:10;opacity:0;pointer-events:none;transition:opacity 0.4s ease}
 .screen.active{opacity:1;pointer-events:all}
 #auth-screen{flex-direction:column}
 
-/* ── AUTH ── */
-.auth-logo{font-size:13px;font-weight:600;letter-spacing:0.3em;text-transform:uppercase;color:var(--muted);margin-bottom:48px;display:flex;align-items:center;gap:10px;animation:fadeUp 0.6s ease both}
-.logo-icon{width:28px;height:28px;background:var(--accent);border-radius:7px;display:grid;place-items:center;font-size:14px}
+.auth-logo{font-size:13px;font-weight:600;letter-spacing:0.3em;text-transform:uppercase;color:var(--muted);margin-bottom:48px;display:flex;align-items:center;gap:12px;animation:fadeUp 0.6s ease both}
+
 .auth-card{width:420px;background:var(--surface);border:1px solid var(--border);border-radius:18px;padding:36px;animation:fadeUp 0.6s ease 0.1s both;position:relative;overflow:hidden}
 .auth-card::before{content:'';position:absolute;top:0;left:50%;transform:translateX(-50%);width:60%;height:1px;background:linear-gradient(90deg,transparent,var(--accent),transparent);opacity:0.5}
 .auth-title{font-size:22px;font-weight:700;margin-bottom:6px;letter-spacing:-0.02em}
@@ -55,286 +53,273 @@ body::before{content:'';position:fixed;inset:0;background-image:url("data:image/
 .btn-primary:disabled{opacity:0.5;cursor:not-allowed;transform:none}
 .auth-error{font-size:12px;color:var(--red);margin-top:12px;font-family:'DM Mono',monospace;text-align:center;min-height:18px}
 
-/* ── LAYOUT SHELL ── */
 #app-screen{flex-direction:column;align-items:stretch;justify-content:flex-start;overflow-y:auto}
 .layout-wrap{display:flex;flex-direction:column;flex:1;min-height:0;position:relative}
 
-/* TOP BAR (default) */
-.topbar{height:60px;background:rgba(10,10,11,0.9);backdrop-filter:blur(16px);border-bottom:1px solid var(--border);display:flex;align-items:center;padding:0 24px;gap:12px;position:sticky;top:0;z-index:100;flex-shrink:0}
-.topbar-logo{display:flex;align-items:center;gap:8px;font-size:15px;font-weight:700;letter-spacing:-0.02em;cursor:pointer}
-.logo-mark{width:24px;height:24px;background:var(--accent);border-radius:6px;display:grid;place-items:center;font-size:12px}
+.topbar{height:56px;background:rgba(10,10,11,0.92);backdrop-filter:blur(20px);border-bottom:1px solid var(--border);display:flex;align-items:center;padding:0 20px;gap:8px;position:sticky;top:0;z-index:100;flex-shrink:0}
 .topbar-spacer{flex:1}
-.topbar-user{display:flex;align-items:center;gap:8px;font-size:13px;color:var(--muted);font-family:'DM Mono',monospace}
-.owner-badge{font-size:10px;font-weight:700;letter-spacing:0.08em;padding:3px 8px;border-radius:20px;background:var(--accent-glow2);border:1px solid rgba(124,111,255,0.3);color:var(--accent);text-transform:uppercase}
-.btn-icon{padding:7px 12px;border:1px solid var(--border);border-radius:var(--radius-sm);background:none;color:var(--muted);font-family:'Syne',sans-serif;font-size:12px;font-weight:600;cursor:pointer;transition:var(--transition);white-space:nowrap}
+.topbar-user{display:flex;align-items:center;gap:7px;font-size:13px;color:var(--muted);font-family:'DM Mono',monospace;flex-shrink:0}
+.owner-badge{font-size:10px;font-weight:700;letter-spacing:0.08em;padding:3px 8px;border-radius:20px;background:var(--accent-glow2);border:1px solid rgba(124,111,255,0.3);color:var(--accent);text-transform:uppercase;white-space:nowrap}
+.btn-icon{padding:7px 11px;border:1px solid var(--border);border-radius:var(--radius-sm);background:none;color:var(--muted);font-family:'Syne',sans-serif;font-size:12px;font-weight:600;cursor:pointer;transition:var(--transition);white-space:nowrap;flex-shrink:0}
 .btn-icon:hover{border-color:var(--border2);color:var(--text)}
-.btn-icon.active-tab{border-color:var(--accent);color:var(--accent);background:var(--accent-glow2)}
-.notif-dot{display:inline-block;width:7px;height:7px;border-radius:50%;background:var(--red);margin-left:5px;vertical-align:middle}
+.notif-dot{display:inline-block;width:6px;height:6px;border-radius:50%;background:var(--red);margin-left:4px;vertical-align:middle;flex-shrink:0}
 
-/* SIDEBAR (left or right) */
+.mobile-menu-btn{display:none;align-items:center;justify-content:center;width:36px;height:36px;border:1px solid var(--border);border-radius:var(--radius-sm);background:none;color:var(--muted);font-size:16px;cursor:pointer;transition:var(--transition);flex-shrink:0}
+.mobile-menu-btn:hover{border-color:var(--border2);color:var(--text)}
+
 body.sidebar-left  .layout-wrap{flex-direction:row}
 body.sidebar-right .layout-wrap{flex-direction:row-reverse}
-body.sidebar-left  .topbar,
-body.sidebar-right .topbar{display:none!important}
-.sidebar{width:var(--nav-w);min-width:var(--nav-w);height:100vh;background:rgba(10,10,11,0.95);backdrop-filter:blur(16px);border-right:1px solid var(--border);display:flex;flex-direction:column;padding:20px 0;position:sticky;top:0;overflow-y:auto;flex-shrink:0;display:none}
+body.sidebar-left  .topbar,body.sidebar-right .topbar{display:none!important}
+.sidebar{width:var(--nav-w);min-width:var(--nav-w);height:100vh;background:rgba(10,10,11,0.97);backdrop-filter:blur(20px);border-right:1px solid var(--border);display:none;flex-direction:column;padding:20px 0;position:sticky;top:0;overflow-y:auto;flex-shrink:0}
 body.sidebar-right .sidebar{border-right:none;border-left:1px solid var(--border)}
-body.sidebar-left  .sidebar,
-body.sidebar-right .sidebar{display:flex}
-.sidebar-logo{display:flex;align-items:center;gap:10px;font-size:15px;font-weight:700;padding:0 20px 20px;border-bottom:1px solid var(--border);margin-bottom:8px;cursor:pointer}
-.sidebar-nav{display:flex;flex-direction:column;gap:2px;padding:8px 12px;flex:1}
-.sidebar-item{display:flex;align-items:center;gap:10px;padding:10px 12px;border-radius:var(--radius-sm);color:var(--muted);font-size:13px;font-weight:600;cursor:pointer;transition:var(--transition);border:none;background:none;text-align:left;width:100%}
+body.sidebar-left  .sidebar,body.sidebar-right .sidebar{display:flex}
+.sidebar-nav{display:flex;flex-direction:column;gap:2px;padding:8px 10px;flex:1}
+.sidebar-item{display:flex;align-items:center;gap:9px;padding:9px 11px;border-radius:var(--radius-sm);color:var(--muted);font-size:13px;font-weight:600;cursor:pointer;transition:var(--transition);border:none;background:none;text-align:left;width:100%}
 .sidebar-item:hover{background:var(--surface2);color:var(--text)}
 .sidebar-item.active{background:var(--accent-glow2);color:var(--accent);border:1px solid rgba(124,111,255,0.2)}
-.sidebar-bottom{padding:12px;border-top:1px solid var(--border);margin-top:auto}
-.sidebar-user{display:flex;align-items:center;gap:10px;padding:10px 12px;cursor:pointer;border-radius:var(--radius-sm);transition:var(--transition)}
+.sidebar-item-icon{font-size:15px;width:18px;text-align:center;flex-shrink:0}
+.sidebar-bottom{padding:10px;border-top:1px solid var(--border);margin-top:auto}
+.sidebar-user{display:flex;align-items:center;gap:9px;padding:9px 10px;cursor:pointer;border-radius:var(--radius-sm);transition:var(--transition)}
 .sidebar-user:hover{background:var(--surface2)}
 
-/* ── CONTENT AREA ── */
-.content-area{flex:1;min-width:0;overflow-y:auto;padding:36px 40px}
-body.topbar-mode .content-area{padding:36px 40px}
+.mobile-sidebar-overlay{position:fixed;inset:0;background:rgba(0,0,0,0.6);z-index:200;opacity:0;pointer-events:none;transition:opacity 0.3s ease;backdrop-filter:blur(4px)}
+.mobile-sidebar-overlay.open{opacity:1;pointer-events:all}
+.mobile-sidebar{position:fixed;top:0;left:0;height:100vh;width:260px;background:rgba(10,10,11,0.99);border-right:1px solid var(--border);display:flex;flex-direction:column;padding:20px 0;z-index:201;transform:translateX(-100%);transition:transform 0.32s cubic-bezier(0.4,0,0.2,1)}
+.mobile-sidebar.open{transform:translateX(0)}
 
-/* ── PAGE VIEWS ── */
-.page-view{display:none}
+.content-area{flex:1;min-width:0;overflow-y:auto;padding:32px 36px}
+
+.page-view{display:none;animation:fadeUp 0.3s ease both}
 .page-view.active{display:block}
-.page-header{margin-bottom:32px}
-.page-title{font-size:28px;font-weight:800;letter-spacing:-0.03em;margin-bottom:6px}
+.page-header{margin-bottom:28px}
+.page-title{font-size:26px;font-weight:800;letter-spacing:-0.03em;margin-bottom:5px}
 .page-desc{color:var(--muted);font-size:13px;font-family:'DM Mono',monospace;font-weight:300}
 
-/* ── AVATAR ── */
-.avatar{width:36px;height:36px;border-radius:50%;display:grid;place-items:center;font-size:14px;font-weight:700;color:white;font-family:'Syne',sans-serif;flex-shrink:0;overflow:hidden;background:var(--accent)}
+.avatar{width:36px;height:36px;border-radius:50%;display:grid;place-items:center;font-size:14px;font-weight:700;color:white;font-family:'Syne',sans-serif;flex-shrink:0;overflow:hidden;background:var(--accent);transition:var(--transition)}
 .avatar img{width:100%;height:100%;object-fit:cover}
 .avatar.sm{width:28px;height:28px;font-size:11px}
 .avatar.lg{width:72px;height:72px;font-size:28px}
 .avatar.xl{width:100px;height:100px;font-size:40px}
 
-/* ── STATS ── */
-.stats-row{display:grid;grid-template-columns:repeat(3,1fr);gap:14px;margin-bottom:32px}
-.stat-card{background:var(--surface);border:1px solid var(--border);border-radius:var(--radius);padding:18px 20px}
-.stat-label{font-size:10px;font-weight:600;text-transform:uppercase;letter-spacing:0.1em;color:var(--muted);margin-bottom:8px;font-family:'DM Mono',monospace}
-.stat-value{font-size:22px;font-weight:800;letter-spacing:-0.03em}
+.stats-row{display:grid;grid-template-columns:repeat(3,1fr);gap:12px;margin-bottom:28px}
+.stat-card{background:var(--surface);border:1px solid var(--border);border-radius:var(--radius);padding:16px 18px;transition:var(--transition)}
+.stat-label{font-size:10px;font-weight:600;text-transform:uppercase;letter-spacing:0.1em;color:var(--muted);margin-bottom:6px;font-family:'DM Mono',monospace}
+.stat-value{font-size:20px;font-weight:800;letter-spacing:-0.03em;transition:var(--transition)}
 
-/* ── UPLOAD ZONES ── */
-.upload-zone{border:1.5px dashed var(--border2);border-radius:var(--radius);padding:40px 20px;text-align:center;cursor:pointer;transition:var(--transition);margin-bottom:32px;position:relative;overflow:hidden}
+.upload-zone{border:1.5px dashed var(--border2);border-radius:var(--radius);padding:36px 20px;text-align:center;cursor:pointer;transition:var(--transition);margin-bottom:28px;position:relative;overflow:hidden}
 .upload-zone::before{content:'';position:absolute;inset:0;background:radial-gradient(ellipse at center,var(--accent-glow2),transparent 70%);opacity:0;transition:opacity 0.3s}
 .upload-zone:hover{border-color:var(--accent)}
 .upload-zone:hover::before{opacity:1}
 .upload-zone:hover .upload-icon{transform:translateY(-4px)}
 .upload-zone.dragover{border-color:var(--accent);background:var(--accent-glow2)}
-.upload-icon{font-size:30px;margin-bottom:12px;display:block;transition:transform 0.3s}
-.upload-title{font-size:15px;font-weight:600;margin-bottom:6px}
+.upload-icon{font-size:28px;margin-bottom:10px;display:block;transition:transform 0.3s}
+.upload-title{font-size:14px;font-weight:600;margin-bottom:5px}
 .upload-hint{font-size:12px;color:var(--muted);font-family:'DM Mono',monospace;font-weight:300}
-.upload-progress{margin-top:16px;height:3px;background:var(--border);border-radius:2px;overflow:hidden;display:none}
+.upload-progress{margin-top:14px;height:3px;background:var(--border);border-radius:2px;overflow:hidden;display:none}
 .upload-progress-bar{height:100%;background:linear-gradient(90deg,var(--accent),var(--green));width:0%;transition:width 0.05s linear;border-radius:2px}
-.upload-pct{font-size:11px;font-family:'DM Mono',monospace;color:var(--accent);margin-top:6px;display:none}
+.upload-pct{font-size:11px;font-family:'DM Mono',monospace;color:var(--accent);margin-top:5px;display:none;text-align:center}
 
-/* ── FILE LIST ── */
-.section-header{display:flex;align-items:center;justify-content:space-between;margin-bottom:14px}
-.section-title{font-size:13px;font-weight:700;letter-spacing:0.08em;text-transform:uppercase;color:var(--muted)}
-.file-list{display:flex;flex-direction:column;gap:8px}
-.file-item{background:var(--surface);border:1px solid var(--border);border-radius:var(--radius);padding:14px 16px;display:flex;align-items:center;gap:12px;transition:var(--transition);flex-wrap:wrap}
+.section-header{display:flex;align-items:center;justify-content:space-between;margin-bottom:12px}
+.section-title{font-size:11px;font-weight:700;letter-spacing:0.1em;text-transform:uppercase;color:var(--muted)}
+.file-list{display:flex;flex-direction:column;gap:7px}
+
+.file-item{background:var(--surface);border:1px solid var(--border);border-radius:var(--radius);padding:13px 15px;display:flex;align-items:center;gap:11px;transition:border-color var(--transition),background var(--transition);flex-wrap:wrap}
 .file-item:hover{border-color:var(--border2);background:var(--surface2)}
-.file-item.pinned{border-color:rgba(251,191,36,0.3);background:rgba(251,191,36,0.03)}
-.file-ext{width:38px;height:42px;background:var(--surface2);border-radius:var(--radius-sm);display:flex;flex-direction:column;align-items:center;justify-content:center;font-size:9px;font-weight:700;font-family:'DM Mono',monospace;color:var(--accent);flex-shrink:0;border:1px solid var(--border)}
-.file-ext-icon{font-size:15px;margin-bottom:2px}
+.file-item.pinned{border-color:rgba(251,191,36,0.3);background:rgba(251,191,36,0.02)}
+.file-ext{width:36px;height:40px;background:var(--surface2);border-radius:var(--radius-sm);display:flex;flex-direction:column;align-items:center;justify-content:center;font-size:8px;font-weight:700;font-family:'DM Mono',monospace;color:var(--accent);flex-shrink:0;border:1px solid var(--border)}
+.file-ext-icon{font-size:14px;margin-bottom:1px}
 .file-info{flex:1;min-width:0}
-.file-name{font-size:14px;font-weight:600;overflow:hidden;text-overflow:ellipsis;margin-bottom:4px;display:flex;align-items:center;gap:6px;flex-wrap:wrap}
+.file-name{font-size:13px;font-weight:600;overflow:hidden;text-overflow:ellipsis;margin-bottom:3px;display:flex;align-items:center;gap:6px;flex-wrap:wrap}
 .file-name-link{cursor:pointer;text-decoration:underline;text-decoration-color:var(--muted2);text-underline-offset:3px;white-space:nowrap;overflow:hidden;text-overflow:ellipsis;transition:color var(--transition)}
 .file-name-link:hover{color:var(--accent);text-decoration-color:var(--accent)}
-.pin-badge{font-size:10px;padding:2px 7px;border-radius:20px;background:rgba(251,191,36,0.15);border:1px solid rgba(251,191,36,0.3);color:var(--yellow);white-space:nowrap;flex-shrink:0}
+.pin-badge{font-size:9px;padding:2px 6px;border-radius:20px;background:rgba(251,191,36,0.15);border:1px solid rgba(251,191,36,0.3);color:var(--yellow);white-space:nowrap;flex-shrink:0}
 .file-meta{font-size:11px;color:var(--muted);font-family:'DM Mono',monospace;font-weight:300}
 .uploader-link{cursor:pointer;color:var(--muted);transition:color var(--transition)}
 .uploader-link:hover{color:var(--accent)}
-.file-actions{display:flex;align-items:center;gap:6px;flex-wrap:wrap;flex-shrink:0}
-.visibility-badge{font-size:10px;font-weight:700;padding:4px 9px;border-radius:20px;letter-spacing:0.06em;text-transform:uppercase;white-space:nowrap}
+.file-actions{display:flex;align-items:center;gap:5px;flex-wrap:wrap;flex-shrink:0}
+.visibility-badge{font-size:10px;font-weight:700;padding:3px 8px;border-radius:20px;letter-spacing:0.06em;text-transform:uppercase;white-space:nowrap}
 .badge-public{background:var(--green-dim);border:1px solid rgba(74,222,128,0.25);color:var(--green)}
 .badge-private{background:rgba(90,90,106,0.15);border:1px solid var(--border);color:var(--muted)}
-.btn-sm{padding:5px 10px;border:1px solid var(--border);border-radius:var(--radius-sm);background:none;color:var(--muted);font-family:'DM Mono',monospace;font-size:11px;cursor:pointer;transition:var(--transition);white-space:nowrap}
+.btn-sm{padding:4px 9px;border:1px solid var(--border);border-radius:var(--radius-sm);background:none;color:var(--muted);font-family:'DM Mono',monospace;font-size:11px;cursor:pointer;transition:var(--transition);white-space:nowrap}
 .btn-sm:hover{border-color:var(--border2);color:var(--text)}
 .btn-sm.dl:hover{border-color:var(--green);color:var(--green)}
 .btn-sm.tog:hover{border-color:var(--accent);color:var(--accent)}
 .btn-sm.pin:hover{border-color:var(--yellow);color:var(--yellow)}
 .btn-sm.pin.active{border-color:rgba(251,191,36,0.5);color:var(--yellow);background:rgba(251,191,36,0.08)}
 .btn-sm.del{border-color:transparent}.btn-sm.del:hover{border-color:var(--red);color:var(--red);background:var(--red-dim)}
-.vote-group{display:flex;align-items:center;gap:4px}
-.btn-vote{padding:4px 9px;border:1px solid var(--border);border-radius:var(--radius-sm);background:none;color:var(--muted);font-size:12px;cursor:pointer;transition:var(--transition);display:flex;align-items:center;gap:4px;white-space:nowrap}
+.vote-group{display:flex;align-items:center;gap:3px}
+.btn-vote{padding:3px 8px;border:1px solid var(--border);border-radius:var(--radius-sm);background:none;color:var(--muted);font-size:11px;cursor:pointer;transition:var(--transition);display:flex;align-items:center;gap:3px;white-space:nowrap}
 .btn-vote:hover{border-color:var(--border2);color:var(--text)}
 .btn-vote.up.voted{border-color:rgba(74,222,128,0.5);color:var(--green);background:var(--green-dim)}
 .btn-vote.down.voted{border-color:rgba(248,113,113,0.5);color:var(--red);background:var(--red-dim)}
 .vote-count{font-size:10px;font-family:'DM Mono',monospace}
 
-/* ── EMPTY / INFO ── */
-.empty-state{text-align:center;padding:60px 20px;color:var(--muted)}
-.empty-icon{font-size:36px;margin-bottom:14px;opacity:0.4}
-.empty-title{font-size:15px;font-weight:600;margin-bottom:6px}
+.empty-state{text-align:center;padding:56px 20px;color:var(--muted)}
+.empty-icon{font-size:32px;margin-bottom:12px;opacity:0.4}
+.empty-title{font-size:15px;font-weight:600;margin-bottom:5px}
 .empty-desc{font-size:12px;font-family:'DM Mono',monospace;font-weight:300}
-.info-bar{background:var(--accent-glow2);border:1px solid rgba(124,111,255,0.2);border-radius:var(--radius);padding:12px 18px;font-size:12px;color:var(--accent);font-family:'DM Mono',monospace;margin-bottom:24px;display:flex;align-items:center;gap:10px}
+.info-bar{background:var(--accent-glow2);border:1px solid rgba(124,111,255,0.2);border-radius:var(--radius);padding:11px 16px;font-size:12px;color:var(--accent);font-family:'DM Mono',monospace;margin-bottom:20px;display:flex;align-items:center;gap:9px}
 
-/* ── MODALS ── */
 .modal-overlay{position:fixed;inset:0;background:rgba(0,0,0,0.75);backdrop-filter:blur(6px);z-index:500;display:flex;align-items:center;justify-content:center;opacity:0;pointer-events:none;transition:opacity 0.25s;padding:16px}
 .modal-overlay.open{opacity:1;pointer-events:all}
-.modal{background:var(--surface);border:1px solid var(--border2);border-radius:16px;padding:32px;width:100%;max-width:480px;position:relative;max-height:90vh;overflow-y:auto}
+.modal{background:var(--surface);border:1px solid var(--border2);border-radius:16px;padding:28px;width:100%;max-width:480px;position:relative;max-height:90vh;overflow-y:auto}
 @keyframes modalIn{from{opacity:0;transform:scale(0.92) translateY(16px)}to{opacity:1;transform:scale(1) translateY(0)}}
 .modal-overlay.open .modal{animation:modalIn 0.28s cubic-bezier(0.34,1.56,0.64,1) both}
-.modal-title{font-size:18px;font-weight:700;margin-bottom:6px;letter-spacing:-0.02em}
-.modal-sub{font-size:12px;color:var(--muted);font-family:'DM Mono',monospace;margin-bottom:24px}
-.modal-close{position:absolute;top:16px;right:16px;width:28px;height:28px;border:1px solid var(--border);border-radius:6px;background:none;color:var(--muted);font-size:14px;cursor:pointer;display:grid;place-items:center;transition:var(--transition)}
+.modal-title{font-size:17px;font-weight:700;margin-bottom:5px;letter-spacing:-0.02em}
+.modal-sub{font-size:12px;color:var(--muted);font-family:'DM Mono',monospace;margin-bottom:22px}
+.modal-close{position:absolute;top:14px;right:14px;width:26px;height:26px;border:1px solid var(--border);border-radius:6px;background:none;color:var(--muted);font-size:13px;cursor:pointer;display:grid;place-items:center;transition:var(--transition)}
 .modal-close:hover{border-color:var(--red);color:var(--red)}
-.modal textarea{width:100%;padding:11px 14px;height:100px;resize:vertical;background:var(--surface2);border:1px solid var(--border);border-radius:var(--radius-sm);color:var(--text);font-family:'DM Mono',monospace;font-size:13px;outline:none;transition:var(--transition)}
+.modal textarea{width:100%;padding:11px 14px;height:90px;resize:vertical;background:var(--surface2);border:1px solid var(--border);border-radius:var(--radius-sm);color:var(--text);font-family:'DM Mono',monospace;font-size:13px;outline:none;transition:var(--transition)}
 .modal textarea:focus{border-color:var(--accent);box-shadow:0 0 0 3px var(--accent-glow)}
-.modal-actions{display:flex;gap:10px;margin-top:16px}
-.btn-cancel{flex:1;padding:11px;border:1px solid var(--border);border-radius:var(--radius-sm);background:none;color:var(--muted);font-family:'Syne',sans-serif;font-size:13px;font-weight:600;cursor:pointer;transition:var(--transition)}
+.modal-actions{display:flex;gap:9px;margin-top:14px}
+.btn-cancel{flex:1;padding:10px;border:1px solid var(--border);border-radius:var(--radius-sm);background:none;color:var(--muted);font-family:'Syne',sans-serif;font-size:13px;font-weight:600;cursor:pointer;transition:var(--transition)}
 .btn-cancel:hover{border-color:var(--border2);color:var(--text)}
-.btn-submit{flex:2;padding:11px;background:var(--accent);border:none;border-radius:var(--radius-sm);color:white;font-family:'Syne',sans-serif;font-size:13px;font-weight:700;cursor:pointer;transition:var(--transition)}
+.btn-submit{flex:2;padding:10px;background:var(--accent);border:none;border-radius:var(--radius-sm);color:white;font-family:'Syne',sans-serif;font-size:13px;font-weight:700;cursor:pointer;transition:var(--transition)}
 .btn-submit:hover{background:var(--accent2)}
 .btn-submit:disabled{opacity:0.4;cursor:not-allowed}
 
-/* ── FILE PICKER ── */
-.req-file-pick{width:100%;padding:11px 14px;cursor:pointer;background:var(--surface2);border:1px solid var(--border);border-radius:var(--radius-sm);color:var(--muted);font-family:'DM Mono',monospace;font-size:12px;transition:var(--transition)}
+.req-file-pick{width:100%;padding:10px 13px;cursor:pointer;background:var(--surface2);border:1px solid var(--border);border-radius:var(--radius-sm);color:var(--muted);font-family:'DM Mono',monospace;font-size:12px;transition:var(--transition)}
 .req-file-pick:hover{border-color:var(--accent);color:var(--text)}
 .req-file-pick.has-file{border-color:rgba(74,222,128,0.4);color:var(--green)}
 
-/* ── DETAIL MODAL ── */
-.detail-header{display:flex;align-items:center;gap:14px;margin-bottom:20px}
-.detail-ext{width:48px;height:54px;background:var(--surface2);border:1px solid var(--border);border-radius:var(--radius-sm);display:flex;flex-direction:column;align-items:center;justify-content:center;font-size:10px;font-weight:700;font-family:'DM Mono',monospace;color:var(--accent);flex-shrink:0}
-.detail-ext-icon{font-size:20px;margin-bottom:2px}
-.detail-name{font-size:16px;font-weight:700;word-break:break-all;letter-spacing:-0.02em}
+.detail-header{display:flex;align-items:center;gap:13px;margin-bottom:18px}
+.detail-ext{width:46px;height:52px;background:var(--surface2);border:1px solid var(--border);border-radius:var(--radius-sm);display:flex;flex-direction:column;align-items:center;justify-content:center;font-size:9px;font-weight:700;font-family:'DM Mono',monospace;color:var(--accent);flex-shrink:0}
+.detail-ext-icon{font-size:19px;margin-bottom:2px}
+.detail-name{font-size:15px;font-weight:700;word-break:break-all;letter-spacing:-0.02em}
 .detail-meta{font-size:11px;color:var(--muted);font-family:'DM Mono',monospace;margin-top:3px}
-.detail-section{margin-bottom:18px}
-.detail-section-label{font-size:10px;font-weight:700;letter-spacing:0.1em;text-transform:uppercase;color:var(--muted);font-family:'DM Mono',monospace;margin-bottom:8px;display:block}
-.detail-desc-box{width:100%;padding:10px 13px;background:var(--surface2);border:1px solid var(--border);border-radius:var(--radius-sm);color:var(--text);font-family:'DM Mono',monospace;font-size:13px;line-height:1.6;min-height:60px;white-space:pre-wrap;word-break:break-word}
+.detail-section{margin-bottom:16px}
+.detail-section-label{font-size:10px;font-weight:700;letter-spacing:0.1em;text-transform:uppercase;color:var(--muted);font-family:'DM Mono',monospace;margin-bottom:7px;display:block}
+.detail-desc-box{width:100%;padding:10px 13px;background:var(--surface2);border:1px solid var(--border);border-radius:var(--radius-sm);color:var(--text);font-family:'DM Mono',monospace;font-size:13px;line-height:1.6;min-height:56px;white-space:pre-wrap;word-break:break-word}
 .detail-desc-box.empty{color:var(--muted);font-style:italic}
-.detail-actions{display:flex;gap:8px;flex-wrap:wrap;margin-top:4px}
-.btn-detail-dl{flex:1;padding:10px 16px;background:var(--accent);border:none;border-radius:var(--radius-sm);color:white;font-family:'Syne',sans-serif;font-size:13px;font-weight:700;cursor:pointer;transition:var(--transition);text-align:center}
+.detail-desc-edit{width:100%;padding:10px 13px;background:var(--surface2);border:1px solid var(--accent);border-radius:var(--radius-sm);color:var(--text);font-family:'DM Mono',monospace;font-size:13px;outline:none;resize:vertical;min-height:70px;box-shadow:0 0 0 3px var(--accent-glow)}
+.detail-actions{display:flex;gap:7px;flex-wrap:wrap;margin-top:4px}
+.btn-detail-dl{flex:1;padding:9px 14px;background:var(--accent);border:none;border-radius:var(--radius-sm);color:white;font-family:'Syne',sans-serif;font-size:13px;font-weight:700;cursor:pointer;transition:var(--transition);text-align:center}
 .btn-detail-dl:hover{background:var(--accent2)}
-.btn-detail-vote{padding:10px 16px;border:1px solid var(--border);border-radius:var(--radius-sm);background:none;color:var(--muted);font-size:13px;cursor:pointer;transition:var(--transition);display:flex;align-items:center;gap:6px;white-space:nowrap}
+.btn-detail-vote{padding:9px 14px;border:1px solid var(--border);border-radius:var(--radius-sm);background:none;color:var(--muted);font-size:13px;cursor:pointer;transition:var(--transition);display:flex;align-items:center;gap:5px;white-space:nowrap}
 .btn-detail-vote:hover{border-color:var(--border2);color:var(--text)}
 .btn-detail-vote.up.voted{border-color:rgba(74,222,128,0.5);color:var(--green);background:var(--green-dim)}
 .btn-detail-vote.down.voted{border-color:rgba(248,113,113,0.5);color:var(--red);background:var(--red-dim)}
 
-/* ── PROFILE MODAL ── */
-.profile-banner{display:flex;align-items:center;gap:18px;margin-bottom:24px;padding:20px;background:var(--surface2);border-radius:var(--radius)}
-.profile-info .profile-name{font-size:18px;font-weight:700;letter-spacing:-0.02em}
+.profile-banner{display:flex;align-items:center;gap:16px;margin-bottom:22px;padding:18px;background:var(--surface2);border-radius:var(--radius)}
+.profile-info .profile-name{font-size:17px;font-weight:700;letter-spacing:-0.02em}
 .profile-info .profile-username{font-size:12px;color:var(--muted);font-family:'DM Mono',monospace;margin-top:2px}
-.profile-info .profile-role{font-size:10px;font-weight:700;padding:2px 8px;border-radius:20px;background:var(--accent-glow2);border:1px solid rgba(124,111,255,0.3);color:var(--accent);text-transform:uppercase;display:inline-block;margin-top:6px}
-.profile-bio{font-size:13px;color:var(--muted);font-family:'DM Mono',monospace;line-height:1.6;margin-top:6px}
-.profile-stat{font-size:11px;color:var(--muted2);font-family:'DM Mono',monospace;margin-top:4px}
-.profile-files{margin-top:20px}
-.profile-actions{display:flex;gap:8px;flex-wrap:wrap;margin-top:16px}
-.btn-profile-msg{padding:8px 16px;border:1px solid var(--accent);border-radius:var(--radius-sm);background:var(--accent-glow2);color:var(--accent);font-family:'Syne',sans-serif;font-size:12px;font-weight:600;cursor:pointer;transition:var(--transition)}
+.profile-info .profile-role{font-size:10px;font-weight:700;padding:2px 8px;border-radius:20px;background:var(--accent-glow2);border:1px solid rgba(124,111,255,0.3);color:var(--accent);text-transform:uppercase;display:inline-block;margin-top:5px}
+.profile-bio{font-size:13px;color:var(--muted);font-family:'DM Mono',monospace;line-height:1.6;margin-top:5px}
+.profile-stat{font-size:11px;color:var(--muted2);font-family:'DM Mono',monospace;margin-top:3px}
+.profile-files{margin-top:18px}
+.profile-actions{display:flex;gap:7px;flex-wrap:wrap;margin-top:14px}
+.btn-profile-msg{padding:7px 14px;border:1px solid var(--accent);border-radius:var(--radius-sm);background:var(--accent-glow2);color:var(--accent);font-family:'Syne',sans-serif;font-size:12px;font-weight:600;cursor:pointer;transition:var(--transition)}
 .btn-profile-msg:hover{background:var(--accent);color:white}
-.btn-profile-ban{padding:8px 16px;border:1px solid rgba(248,113,113,0.4);border-radius:var(--radius-sm);background:var(--red-dim);color:var(--red);font-family:'Syne',sans-serif;font-size:12px;font-weight:600;cursor:pointer;transition:var(--transition)}
+.btn-profile-ban{padding:7px 14px;border:1px solid rgba(248,113,113,0.4);border-radius:var(--radius-sm);background:var(--red-dim);color:var(--red);font-family:'Syne',sans-serif;font-size:12px;font-weight:600;cursor:pointer;transition:var(--transition)}
 .btn-profile-ban:hover{background:rgba(248,113,113,0.22)}
-.btn-profile-warn{padding:8px 16px;border:1px solid rgba(251,191,36,0.4);border-radius:var(--radius-sm);background:var(--yellow-dim);color:var(--yellow);font-family:'Syne',sans-serif;font-size:12px;font-weight:600;cursor:pointer;transition:var(--transition)}
+.btn-profile-warn{padding:7px 14px;border:1px solid rgba(251,191,36,0.4);border-radius:var(--radius-sm);background:var(--yellow-dim);color:var(--yellow);font-family:'Syne',sans-serif;font-size:12px;font-weight:600;cursor:pointer;transition:var(--transition)}
 .btn-profile-warn:hover{background:rgba(251,191,36,0.18)}
 
-/* ── OWN PROFILE EDIT ── */
-.color-swatches{display:flex;gap:8px;flex-wrap:wrap;margin-top:8px}
-.color-swatch{width:28px;height:28px;border-radius:50%;cursor:pointer;border:2px solid transparent;transition:border-color 0.2s}
-.color-swatch.selected{border-color:white}
+.color-swatches{display:flex;gap:7px;flex-wrap:wrap;margin-top:8px}
+.color-swatch{width:26px;height:26px;border-radius:50%;cursor:pointer;border:2px solid transparent;transition:border-color 0.2s,transform 0.15s}
+.color-swatch.selected{border-color:white;transform:scale(1.15)}
 
-/* ── INBOX / DM PANEL ── */
-.inbox-bulk{display:flex;align-items:center;justify-content:flex-end;gap:8px;margin-bottom:14px}
-.btn-bulk{padding:6px 14px;border:1px solid var(--border);border-radius:var(--radius-sm);background:none;color:var(--muted);font-family:'DM Mono',monospace;font-size:11px;cursor:pointer;transition:var(--transition)}
+.avatar-upload-zone{display:flex;align-items:center;gap:14px;margin-bottom:14px;padding:14px;background:var(--surface2);border:1px solid var(--border);border-radius:var(--radius);cursor:pointer;transition:var(--transition)}
+.avatar-upload-zone:hover{border-color:var(--accent)}
+.avatar-upload-info{flex:1}
+.avatar-upload-title{font-size:13px;font-weight:600;margin-bottom:3px}
+.avatar-upload-hint{font-size:11px;color:var(--muted);font-family:'DM Mono',monospace}
+.avatar-progress{margin-top:8px;height:2px;background:var(--border);border-radius:2px;overflow:hidden;display:none}
+.avatar-progress-bar{height:100%;background:linear-gradient(90deg,var(--accent),var(--green));width:0%;transition:width 0.05s linear;border-radius:2px}
+
+.inbox-bulk{display:flex;align-items:center;justify-content:flex-end;gap:7px;margin-bottom:12px}
+.btn-bulk{padding:5px 13px;border:1px solid var(--border);border-radius:var(--radius-sm);background:none;color:var(--muted);font-family:'DM Mono',monospace;font-size:11px;cursor:pointer;transition:var(--transition)}
 .btn-bulk:hover{border-color:var(--border2);color:var(--text)}
 .btn-bulk.danger:hover{border-color:var(--red);color:var(--red);background:var(--red-dim)}
-.inbox-item{background:var(--surface);border:1px solid var(--border);border-radius:var(--radius);padding:16px 18px;transition:var(--transition);margin-bottom:10px}
+.inbox-item{background:var(--surface);border:1px solid var(--border);border-radius:var(--radius);padding:15px 16px;transition:var(--transition);margin-bottom:9px}
 .inbox-item.unread{border-left:3px solid var(--accent)}
 .inbox-item:hover{border-color:var(--border2)}
-.inbox-top{display:flex;align-items:center;justify-content:space-between;margin-bottom:8px;gap:10px;flex-wrap:wrap}
+.inbox-top{display:flex;align-items:center;justify-content:space-between;margin-bottom:7px;gap:9px;flex-wrap:wrap}
 .inbox-from{font-size:13px;font-weight:700}
 .inbox-date{font-size:11px;color:var(--muted);font-family:'DM Mono',monospace}
-.inbox-filename{font-size:11px;color:var(--accent);font-family:'DM Mono',monospace;margin-bottom:6px}
-.inbox-reason{font-size:13px;line-height:1.6;margin-bottom:10px}
-.inbox-actions{display:flex;gap:8px;flex-wrap:wrap;align-items:center}
-.btn-approve{padding:5px 14px;border:1px solid rgba(74,222,128,0.4);border-radius:var(--radius-sm);background:var(--green-dim);color:var(--green);font-family:'DM Mono',monospace;font-size:11px;cursor:pointer;transition:var(--transition);font-weight:600}
+.inbox-filename{font-size:11px;color:var(--accent);font-family:'DM Mono',monospace;margin-bottom:5px}
+.inbox-reason{font-size:13px;line-height:1.6;margin-bottom:9px}
+.inbox-actions{display:flex;gap:7px;flex-wrap:wrap;align-items:center}
+.btn-approve{padding:4px 13px;border:1px solid rgba(74,222,128,0.4);border-radius:var(--radius-sm);background:var(--green-dim);color:var(--green);font-family:'DM Mono',monospace;font-size:11px;cursor:pointer;transition:var(--transition);font-weight:600}
 .btn-approve:hover{background:rgba(74,222,128,0.22);border-color:var(--green)}
-.btn-decline{padding:5px 14px;border:1px solid rgba(248,113,113,0.4);border-radius:var(--radius-sm);background:var(--red-dim);color:var(--red);font-family:'DM Mono',monospace;font-size:11px;cursor:pointer;transition:var(--transition);font-weight:600}
+.btn-decline{padding:4px 13px;border:1px solid rgba(248,113,113,0.4);border-radius:var(--radius-sm);background:var(--red-dim);color:var(--red);font-family:'DM Mono',monospace;font-size:11px;cursor:pointer;transition:var(--transition);font-weight:600}
 .btn-decline:hover{background:rgba(248,113,113,0.22);border-color:var(--red)}
-.btn-mark-read{padding:5px 12px;border:1px solid var(--border);border-radius:var(--radius-sm);background:none;color:var(--muted);font-family:'DM Mono',monospace;font-size:11px;cursor:pointer;transition:var(--transition)}
+.btn-mark-read{padding:4px 11px;border:1px solid var(--border);border-radius:var(--radius-sm);background:none;color:var(--muted);font-family:'DM Mono',monospace;font-size:11px;cursor:pointer;transition:var(--transition)}
 .btn-mark-read:hover{border-color:var(--accent);color:var(--accent)}
-.btn-inbox-del{padding:5px 10px;border:1px solid transparent;border-radius:var(--radius-sm);background:none;color:var(--muted2);font-size:12px;cursor:pointer;transition:var(--transition)}
+.btn-inbox-del{padding:4px 9px;border:1px solid transparent;border-radius:var(--radius-sm);background:none;color:var(--muted2);font-size:11px;cursor:pointer;transition:var(--transition)}
 .btn-inbox-del:hover{border-color:var(--red);color:var(--red);background:var(--red-dim)}
 
-/* DM inbox items */
-.dm-item{background:var(--surface);border:1px solid var(--border);border-radius:var(--radius);padding:14px 16px;display:flex;align-items:center;gap:12px;cursor:pointer;transition:var(--transition);margin-bottom:8px}
+.dm-item{background:var(--surface);border:1px solid var(--border);border-radius:var(--radius);padding:13px 15px;display:flex;align-items:center;gap:11px;cursor:pointer;transition:var(--transition);margin-bottom:7px}
 .dm-item:hover{border-color:var(--border2);background:var(--surface2)}
 .dm-item.unread{border-left:3px solid var(--accent)}
 .dm-item-info{flex:1;min-width:0}
-.dm-item-name{font-size:14px;font-weight:600;margin-bottom:3px}
+.dm-item-name{font-size:13px;font-weight:600;margin-bottom:2px}
 .dm-item-preview{font-size:12px;color:var(--muted);font-family:'DM Mono',monospace;white-space:nowrap;overflow:hidden;text-overflow:ellipsis}
-.dm-accept-row{display:flex;gap:8px;margin-top:8px}
+.dm-accept-row{display:flex;gap:7px;margin-top:7px}
 
-/* ── DM CHATBOX ── */
-#dm-chatbox{position:fixed;bottom:24px;right:24px;width:320px;background:var(--surface);border:1px solid var(--border2);border-radius:16px;z-index:400;display:none;flex-direction:column;box-shadow:0 20px 60px rgba(0,0,0,0.5)}
+#dm-chatbox{position:fixed;bottom:22px;right:22px;width:310px;background:var(--surface);border:1px solid var(--border2);border-radius:16px;z-index:400;display:none;flex-direction:column;box-shadow:0 20px 60px rgba(0,0,0,0.5);animation:modalIn 0.28s cubic-bezier(0.34,1.56,0.64,1) both}
 #dm-chatbox.open{display:flex}
-.chatbox-header{display:flex;align-items:center;gap:10px;padding:14px 16px;border-bottom:1px solid var(--border);cursor:pointer}
-.chatbox-title{flex:1;font-size:14px;font-weight:700}
-.chatbox-close{width:24px;height:24px;border:1px solid var(--border);border-radius:5px;background:none;color:var(--muted);font-size:12px;cursor:pointer;display:grid;place-items:center;transition:var(--transition);flex-shrink:0}
+.chatbox-header{display:flex;align-items:center;gap:9px;padding:13px 15px;border-bottom:1px solid var(--border)}
+.chatbox-title{flex:1;font-size:13px;font-weight:700}
+.chatbox-close{width:22px;height:22px;border:1px solid var(--border);border-radius:5px;background:none;color:var(--muted);font-size:11px;cursor:pointer;display:grid;place-items:center;transition:var(--transition);flex-shrink:0}
 .chatbox-close:hover{color:var(--red);border-color:var(--red)}
-.chatbox-messages{flex:1;overflow-y:auto;padding:12px 14px;display:flex;flex-direction:column;gap:8px;max-height:280px;min-height:120px}
-.chat-msg{max-width:85%;padding:8px 12px;border-radius:10px;font-size:13px;line-height:1.5;font-family:'DM Mono',monospace;word-break:break-word}
+.chatbox-messages{flex:1;overflow-y:auto;padding:11px 13px;display:flex;flex-direction:column;gap:7px;max-height:260px;min-height:100px}
+.chat-msg{max-width:85%;padding:7px 11px;border-radius:10px;font-size:12px;line-height:1.5;font-family:'DM Mono',monospace;word-break:break-word}
 .chat-msg.mine{background:var(--accent);color:white;align-self:flex-end;border-bottom-right-radius:3px}
 .chat-msg.theirs{background:var(--surface2);color:var(--text);align-self:flex-start;border-bottom-left-radius:3px}
 .chat-msg.system{background:var(--yellow-dim);color:var(--yellow);border:1px solid rgba(251,191,36,0.2);align-self:center;font-size:11px;text-align:center;border-radius:8px}
-.chat-ts{font-size:10px;color:var(--muted2);margin-top:2px;text-align:right;font-family:'DM Mono',monospace}
-.chatbox-input{display:flex;gap:8px;padding:10px 14px;border-top:1px solid var(--border)}
-.chatbox-input input{flex:1;padding:8px 12px;background:var(--surface2);border:1px solid var(--border);border-radius:var(--radius-sm);color:var(--text);font-family:'DM Mono',monospace;font-size:13px;outline:none;transition:var(--transition)}
+.chat-ts{font-size:10px;color:var(--muted2);margin-top:2px;font-family:'DM Mono',monospace}
+.chat-ts.mine-ts{text-align:right}
+.chatbox-input{display:flex;gap:7px;padding:9px 13px;border-top:1px solid var(--border)}
+.chatbox-input input{flex:1;padding:7px 11px;background:var(--surface2);border:1px solid var(--border);border-radius:var(--radius-sm);color:var(--text);font-family:'DM Mono',monospace;font-size:12px;outline:none;transition:var(--transition)}
 .chatbox-input input:focus{border-color:var(--accent)}
-.chatbox-send{padding:8px 12px;background:var(--accent);border:none;border-radius:var(--radius-sm);color:white;font-size:14px;cursor:pointer;transition:var(--transition);flex-shrink:0}
+.chatbox-send{padding:7px 11px;background:var(--accent);border:none;border-radius:var(--radius-sm);color:white;font-size:13px;cursor:pointer;transition:var(--transition);flex-shrink:0}
 .chatbox-send:hover{background:var(--accent2)}
 
-/* ── SETTINGS / PANEL ── */
-.settings-section{margin-bottom:28px}
-.settings-label{font-size:11px;font-weight:600;letter-spacing:0.1em;text-transform:uppercase;color:var(--muted);margin-bottom:10px;font-family:'DM Mono',monospace;display:block}
-.settings-card{background:var(--surface);border:1px solid var(--border);border-radius:var(--radius);padding:20px}
-.settings-row{display:flex;gap:10px;align-items:flex-end}
+.settings-section{margin-bottom:24px}
+.settings-label{font-size:11px;font-weight:600;letter-spacing:0.1em;text-transform:uppercase;color:var(--muted);margin-bottom:9px;font-family:'DM Mono',monospace;display:block}
+.settings-card{background:var(--surface);border:1px solid var(--border);border-radius:var(--radius);padding:18px}
+.settings-row{display:flex;gap:9px;align-items:flex-end}
 .settings-row .form-input{flex:1}
-.btn-save{padding:11px 20px;background:var(--accent);border:none;border-radius:var(--radius-sm);color:white;font-family:'Syne',sans-serif;font-size:13px;font-weight:700;cursor:pointer;transition:var(--transition);white-space:nowrap}
+.btn-save{padding:10px 18px;background:var(--accent);border:none;border-radius:var(--radius-sm);color:white;font-family:'Syne',sans-serif;font-size:13px;font-weight:700;cursor:pointer;transition:var(--transition);white-space:nowrap}
 .btn-save:hover{background:var(--accent2)}
-.settings-hint{font-size:11px;color:var(--muted);font-family:'DM Mono',monospace;margin-top:8px}
-.layout-opts{display:flex;gap:10px;margin-top:8px}
-.layout-opt{flex:1;padding:12px;border:1px solid var(--border);border-radius:var(--radius-sm);background:none;color:var(--muted);font-family:'Syne',sans-serif;font-size:12px;font-weight:600;cursor:pointer;transition:var(--transition);text-align:center}
+.settings-hint{font-size:11px;color:var(--muted);font-family:'DM Mono',monospace;margin-top:7px}
+.layout-opts{display:flex;gap:9px;margin-top:7px}
+.layout-opt{flex:1;padding:11px;border:1px solid var(--border);border-radius:var(--radius-sm);background:none;color:var(--muted);font-family:'Syne',sans-serif;font-size:12px;font-weight:600;cursor:pointer;transition:var(--transition);text-align:center}
 .layout-opt:hover{border-color:var(--border2);color:var(--text)}
 .layout-opt.selected{border-color:var(--accent);color:var(--accent);background:var(--accent-glow2)}
 
-/* ── USERS PAGE ── */
-.user-row{background:var(--surface);border:1px solid var(--border);border-radius:var(--radius);padding:14px 16px;display:flex;align-items:center;gap:14px;cursor:pointer;transition:var(--transition);margin-bottom:8px}
+.user-row{background:var(--surface);border:1px solid var(--border);border-radius:var(--radius);padding:13px 15px;display:flex;align-items:center;gap:12px;cursor:pointer;transition:var(--transition);margin-bottom:7px}
 .user-row:hover{border-color:var(--border2);background:var(--surface2)}
 .user-row-info{flex:1}
-.user-row-name{font-size:14px;font-weight:700}
+.user-row-name{font-size:13px;font-weight:700}
 .user-row-meta{font-size:11px;color:var(--muted);font-family:'DM Mono',monospace;margin-top:2px}
-.ban-badge{font-size:10px;font-weight:700;padding:2px 8px;border-radius:20px;background:var(--red-dim);border:1px solid rgba(248,113,113,0.3);color:var(--red)}
-.warn-badge{font-size:10px;font-weight:700;padding:2px 8px;border-radius:20px;background:var(--yellow-dim);border:1px solid rgba(251,191,36,0.3);color:var(--yellow)}
+.ban-badge{font-size:10px;font-weight:700;padding:2px 7px;border-radius:20px;background:var(--red-dim);border:1px solid rgba(248,113,113,0.3);color:var(--red)}
+.warn-badge{font-size:10px;font-weight:700;padding:2px 7px;border-radius:20px;background:var(--yellow-dim);border:1px solid rgba(251,191,36,0.3);color:var(--yellow)}
 
-/* ── TOAST ── */
-.toast-container{position:fixed;bottom:28px;left:50%;transform:translateX(-50%);z-index:9999;display:flex;flex-direction:column;gap:8px;pointer-events:none;align-items:center}
-.toast{background:var(--surface2);border:1px solid var(--border2);border-radius:var(--radius-sm);padding:12px 20px;font-size:13px;font-family:'DM Mono',monospace;display:flex;align-items:center;gap:10px;max-width:380px;box-shadow:0 8px 32px rgba(0,0,0,0.4);animation:toastIn 0.3s cubic-bezier(0.34,1.56,0.64,1) both}
+.toast-container{position:fixed;bottom:24px;left:50%;transform:translateX(-50%);z-index:9999;display:flex;flex-direction:column;gap:7px;pointer-events:none;align-items:center}
+.toast{background:var(--surface2);border:1px solid var(--border2);border-radius:var(--radius-sm);padding:11px 18px;font-size:13px;font-family:'DM Mono',monospace;display:flex;align-items:center;gap:9px;max-width:360px;box-shadow:0 8px 32px rgba(0,0,0,0.4);animation:toastIn 0.3s cubic-bezier(0.34,1.56,0.64,1) both}
 .toast.success{border-left:3px solid var(--green)}
 .toast.error{border-left:3px solid var(--red)}
 .toast.info{border-left:3px solid var(--accent)}
-@keyframes toastIn{from{opacity:0;transform:translateY(16px) scale(0.95)}to{opacity:1;transform:translateY(0) scale(1)}}
-@keyframes toastOut{to{opacity:0;transform:translateY(12px) scale(0.9)}}
-@keyframes fadeUp{from{opacity:0;transform:translateY(16px)}to{opacity:1;transform:translateY(0)}}
-@keyframes slideIn{from{opacity:0;transform:translateY(8px)}to{opacity:1;transform:translateY(0)}}
+@keyframes toastIn{from{opacity:0;transform:translateY(14px) scale(0.95)}to{opacity:1;transform:translateY(0) scale(1)}}
+@keyframes toastOut{to{opacity:0;transform:translateY(10px) scale(0.9)}}
+@keyframes fadeUp{from{opacity:0;transform:translateY(14px)}to{opacity:1;transform:translateY(0)}}
 
-/* ── MOBILE ── */
-@media(max-width:640px){
-  .auth-card{width:calc(100vw - 32px);padding:24px 20px}
-  .auth-logo{margin-bottom:32px}
+@media(max-width:768px){
+  .mobile-menu-btn{display:flex}
+  body.sidebar-left .topbar,body.sidebar-right .topbar{display:flex!important}
+  body.sidebar-left .sidebar,body.sidebar-right .sidebar{display:none!important}
+  .topbar-user>span,#user-label{display:none}
   .content-area{padding:20px 14px}
   .stats-row{grid-template-columns:1fr 1fr}
   .stats-row .stat-card:last-child{grid-column:1/-1}
-  .file-item{gap:10px}
-  .file-actions{width:100%;justify-content:flex-end;margin-top:4px}
-  .toast-container{bottom:16px;left:16px;right:16px;transform:none;align-items:stretch}
-  #dm-chatbox{width:calc(100vw - 32px);right:16px;bottom:16px}
-  body.sidebar-left .sidebar,body.sidebar-right .sidebar{display:none}
-  .topbar{display:flex!important}
-}
-@media(max-width:380px){
-  .auth-card{padding:20px 16px}
-  .page-title{font-size:22px}
-  .btn-icon{padding:6px 8px;font-size:11px}
+  .file-item{gap:9px}
+  .file-actions{width:100%;justify-content:flex-end;margin-top:3px}
+  .toast-container{bottom:14px;left:12px;right:12px;transform:none;align-items:stretch}
+  #dm-chatbox{width:calc(100vw - 28px);right:14px;bottom:14px}
+  .modal{padding:22px 18px}
+  .auth-card{width:calc(100vw - 28px);padding:24px 18px}
 }
 </style>
 </head>
@@ -342,15 +327,13 @@ body.topbar-mode .content-area{padding:36px 40px}
 <div class="orb orb-1"></div>
 <div class="orb orb-2"></div>
 
-<!-- ═══ AUTH SCREEN ═══ -->
 <div class="screen active" id="auth-screen">
-  <div class="auth-logo"><div class="logo-icon">⬡</div> Vault</div>
   <div class="auth-card">
     <div id="auth-server-step">
       <div class="auth-title">Connect</div>
       <div class="auth-subtitle">// enter your vault server URL</div>
       <div class="form-group"><label class="form-label">Server URL</label><input class="form-input" type="url" id="auth-server-url" placeholder="https://your-vps-ip:3000" autocomplete="off" spellcheck="false"></div>
-      <button class="btn-primary" id="auth-connect-btn" onclick="authConnect()">Connect →</button>
+      <button class="btn-primary" id="auth-connect-btn" onclick="authConnect()">Connect</button>
       <div class="auth-error" id="auth-server-error"></div>
     </div>
     <div id="auth-login-step" style="display:none">
@@ -363,85 +346,99 @@ body.topbar-mode .content-area{padding:36px 40px}
       <div id="login-form">
         <div class="form-group"><label class="form-label">Username</label><input class="form-input" type="text" id="login-user" placeholder="your_username" autocomplete="off" spellcheck="false"></div>
         <div class="form-group"><label class="form-label">Password</label><input class="form-input" type="password" id="login-pass" placeholder="password" autocomplete="off"></div>
-        <button class="btn-primary" id="login-btn" onclick="doLogin()">Sign In →</button>
+        <button class="btn-primary" id="login-btn" onclick="doLogin()">Sign In</button>
         <div class="auth-error" id="login-error"></div>
       </div>
       <div id="signup-form" style="display:none">
         <div class="form-group"><label class="form-label">Username</label><input class="form-input" type="text" id="signup-user" placeholder="choose_username" autocomplete="off" spellcheck="false"></div>
         <div class="form-group"><label class="form-label">Password</label><input class="form-input" type="password" id="signup-pass" placeholder="min 6 characters" autocomplete="new-password"></div>
         <div class="form-group"><label class="form-label">Confirm Password</label><input class="form-input" type="password" id="signup-pass2" placeholder="repeat password" autocomplete="new-password"></div>
-        <button class="btn-primary" id="signup-btn" onclick="doSignup()">Create Account →</button>
+        <button class="btn-primary" id="signup-btn" onclick="doSignup()">Create Account</button>
         <div class="auth-error" id="signup-error"></div>
       </div>
-      <div style="margin-top:18px;text-align:center"><button onclick="authDisconnect()" style="background:none;border:none;color:var(--muted);font-family:'DM Mono',monospace;font-size:11px;cursor:pointer;text-decoration:underline;text-underline-offset:3px">← change server</button></div>
+      <div style="margin-top:16px;text-align:center"><button onclick="authDisconnect()" style="background:none;border:none;color:var(--muted);font-family:'DM Mono',monospace;font-size:11px;cursor:pointer;text-decoration:underline;text-underline-offset:3px">change server</button></div>
     </div>
   </div>
 </div>
 
-<!-- ═══ APP SCREEN ═══ -->
 <div class="screen" id="app-screen">
-  <!-- TOPBAR (hidden when sidebar active) -->
   <div class="topbar" id="topbar">
-    <div class="topbar-logo" onclick="navTo('files')"><div class="logo-mark">⬡</div> Vault</div>
+    <button class="mobile-menu-btn" id="mobile-menu-btn" onclick="openMobileSidebar()">&#9776;</button>
     <div class="topbar-spacer"></div>
     <div class="topbar-user">
       <div class="avatar sm" id="topbar-avatar" onclick="navTo('myprofile')" style="cursor:pointer"></div>
-      <span id="user-label">—</span>
+      <span id="user-label" style="font-size:12px;font-weight:600;color:var(--text)"></span>
       <span class="owner-badge" id="owner-badge" style="display:none">Owner</span>
     </div>
-    <button class="btn-icon" id="topbar-panel-btn" style="display:none" onclick="navTo('panel')">⚙ Panel <span class="notif-dot" id="inbox-dot" style="display:none"></span></button>
-    <button class="btn-icon" onclick="navTo('messages')">💬 <span class="notif-dot" id="dm-dot" style="display:none"></span></button>
+    <button class="btn-icon" id="topbar-panel-btn" style="display:none" onclick="navTo('panel')">Panel <span class="notif-dot" id="inbox-dot" style="display:none"></span></button>
+    <button class="btn-icon" onclick="navTo('messages')">Messages <span class="notif-dot" id="dm-dot" style="display:none"></span></button>
     <button class="btn-icon" onclick="navTo('settings')">Settings</button>
     <button class="btn-icon" onclick="doLogout()">Sign out</button>
   </div>
 
   <div class="layout-wrap" id="layout-wrap">
-    <!-- SIDEBAR (shown in sidebar modes) -->
     <div class="sidebar" id="sidebar">
-      <div class="sidebar-logo" onclick="navTo('files')"><div class="logo-mark">⬡</div> Vault</div>
       <div class="sidebar-nav">
-        <button class="sidebar-item active" id="snav-files" onclick="navTo('files')">📁 Files</button>
-        <button class="sidebar-item" id="snav-messages" onclick="navTo('messages')">💬 Messages <span class="notif-dot" id="sb-dm-dot" style="display:none"></span></button>
-        <button class="sidebar-item" id="snav-myprofile" onclick="navTo('myprofile')">👤 My Profile</button>
-        <button class="sidebar-item" id="snav-settings" onclick="navTo('settings')">⚙ Settings</button>
-        <button class="sidebar-item" id="snav-panel" style="display:none" onclick="navTo('panel')">🔑 Panel <span class="notif-dot" id="sb-inbox-dot" style="display:none"></span></button>
-        <button class="sidebar-item" id="snav-users" style="display:none" onclick="navTo('users')">👥 Users</button>
+        <button class="sidebar-item active" id="snav-files" onclick="navTo('files')"><span class="sidebar-item-icon">&#9679;</span>Files</button>
+        <button class="sidebar-item" id="snav-messages" onclick="navTo('messages')"><span class="sidebar-item-icon">&#9675;</span>Messages <span class="notif-dot" id="sb-dm-dot" style="display:none"></span></button>
+        <button class="sidebar-item" id="snav-myprofile" onclick="navTo('myprofile')"><span class="sidebar-item-icon">&#9632;</span>My Profile</button>
+        <button class="sidebar-item" id="snav-settings" onclick="navTo('settings')"><span class="sidebar-item-icon">&#8853;</span>Settings</button>
+        <button class="sidebar-item" id="snav-panel" style="display:none" onclick="navTo('panel')"><span class="sidebar-item-icon">&#9670;</span>Panel <span class="notif-dot" id="sb-inbox-dot" style="display:none"></span></button>
+        <button class="sidebar-item" id="snav-users" style="display:none" onclick="navTo('users')"><span class="sidebar-item-icon">&#9632;</span>Users</button>
       </div>
       <div class="sidebar-bottom">
         <div class="sidebar-user" onclick="navTo('myprofile')">
           <div class="avatar sm" id="sidebar-avatar"></div>
           <div style="flex:1;min-width:0">
-            <div style="font-size:13px;font-weight:700;white-space:nowrap;overflow:hidden;text-overflow:ellipsis" id="sidebar-username">—</div>
-            <div style="font-size:11px;color:var(--muted);font-family:'DM Mono',monospace" id="sidebar-role">user</div>
+            <div style="font-size:12px;font-weight:700;white-space:nowrap;overflow:hidden;text-overflow:ellipsis" id="sidebar-username"></div>
+            <div style="font-size:10px;color:var(--muted);font-family:'DM Mono',monospace" id="sidebar-role">user</div>
           </div>
-          <button class="btn-icon" onclick="event.stopPropagation();doLogout()" style="padding:5px 9px;font-size:11px">Out</button>
+          <button class="btn-icon" onclick="event.stopPropagation();doLogout()" style="padding:4px 8px;font-size:11px">Out</button>
         </div>
       </div>
     </div>
 
-    <!-- CONTENT -->
+    <div class="mobile-sidebar-overlay" id="mobile-overlay" onclick="closeMobileSidebar()"></div>
+    <div class="mobile-sidebar" id="mobile-sidebar">
+      <div class="sidebar-nav">
+        <button class="sidebar-item" onclick="navTo('files');closeMobileSidebar()"><span class="sidebar-item-icon">&#9679;</span>Files</button>
+        <button class="sidebar-item" onclick="navTo('messages');closeMobileSidebar()"><span class="sidebar-item-icon">&#9675;</span>Messages</button>
+        <button class="sidebar-item" onclick="navTo('myprofile');closeMobileSidebar()"><span class="sidebar-item-icon">&#9632;</span>My Profile</button>
+        <button class="sidebar-item" onclick="navTo('settings');closeMobileSidebar()"><span class="sidebar-item-icon">&#8853;</span>Settings</button>
+        <button class="sidebar-item" id="mob-snav-panel" style="display:none" onclick="navTo('panel');closeMobileSidebar()"><span class="sidebar-item-icon">&#9670;</span>Panel</button>
+        <button class="sidebar-item" id="mob-snav-users" style="display:none" onclick="navTo('users');closeMobileSidebar()"><span class="sidebar-item-icon">&#9632;</span>Users</button>
+      </div>
+      <div class="sidebar-bottom">
+        <div class="sidebar-user" onclick="navTo('myprofile');closeMobileSidebar()">
+          <div class="avatar sm" id="mob-sidebar-avatar"></div>
+          <div style="flex:1;min-width:0">
+            <div style="font-size:12px;font-weight:700;white-space:nowrap;overflow:hidden;text-overflow:ellipsis" id="mob-sidebar-username"></div>
+            <div style="font-size:10px;color:var(--muted);font-family:'DM Mono',monospace" id="mob-sidebar-role">user</div>
+          </div>
+          <button class="btn-icon" onclick="event.stopPropagation();doLogout()" style="padding:4px 8px;font-size:11px">Out</button>
+        </div>
+      </div>
+    </div>
+
     <div class="content-area" id="content-area">
 
-      <!-- FILES PAGE -->
       <div class="page-view active" id="page-files">
-        <div class="page-header"><div class="page-title">Files</div><div class="page-desc" id="page-desc">// loading…</div></div>
-        <div class="info-bar" id="owner-info-bar" style="display:none">◆ You are the vault owner — manage visibility, pins and inbox.</div>
+        <div class="page-header"><div class="page-title">Your Files</div><div class="page-desc" id="page-desc">// loading</div></div>
+        <div class="info-bar" id="owner-info-bar" style="display:none">You are the vault owner — manage visibility, pins and inbox.</div>
         <div class="stats-row">
           <div class="stat-card"><div class="stat-label">Total</div><div class="stat-value" id="stat-total">0</div></div>
           <div class="stat-card"><div class="stat-label">Public</div><div class="stat-value" id="stat-public" style="color:var(--green)">0</div></div>
           <div class="stat-card"><div class="stat-label">Private</div><div class="stat-value" id="stat-private" style="color:var(--muted)">0</div></div>
         </div>
-        <!-- Owner upload zone -->
         <div class="upload-zone" id="upload-zone" style="display:none" onclick="document.getElementById('file-input').click()" ondragover="onDragOver(event)" ondragleave="onDragLeave(event)" ondrop="onDrop(event)">
-          <span class="upload-icon">⊕</span>
+          <span class="upload-icon">+</span>
           <div class="upload-title">Drop files here or click to upload</div>
           <div class="upload-hint">Any file type · Stored securely on your server</div>
           <div class="upload-progress" id="upload-progress"><div class="upload-progress-bar" id="upload-progress-bar"></div></div>
           <div class="upload-pct" id="upload-pct">0%</div>
         </div>
-        <!-- User request zone -->
         <div class="upload-zone" id="request-zone" style="display:none" onclick="openRequestModal()">
-          <span class="upload-icon">✉</span>
+          <span class="upload-icon">@</span>
           <div class="upload-title">Send a file request to the owner</div>
           <div class="upload-hint">Attach your file + reason — the owner reviews it</div>
         </div>
@@ -452,80 +449,80 @@ body.topbar-mode .content-area{padding:36px 40px}
           <div style="font-size:11px;color:var(--muted);font-family:'DM Mono',monospace" id="files-count"></div>
         </div>
         <div class="file-list" id="file-list">
-          <div class="empty-state"><div class="empty-icon">◫</div><div class="empty-title">No files yet</div><div class="empty-desc">Upload something to get started</div></div>
+          <div class="empty-state"><div class="empty-icon">&#9633;</div><div class="empty-title">No files yet</div><div class="empty-desc">Upload something to get started</div></div>
         </div>
       </div>
 
-      <!-- MESSAGES PAGE -->
       <div class="page-view" id="page-messages">
         <div class="page-header"><div class="page-title">Messages</div><div class="page-desc">// your conversations</div></div>
-        <div id="dm-threads-list"><div class="empty-state"><div class="empty-icon">💬</div><div class="empty-title">No messages yet</div><div class="empty-desc">Click a user's name on any file to start a conversation</div></div></div>
+        <div id="dm-threads-list"><div class="empty-state"><div class="empty-icon">&#9675;</div><div class="empty-title">No messages yet</div><div class="empty-desc">Click a username on any file to start a conversation</div></div></div>
       </div>
 
-      <!-- MY PROFILE PAGE -->
       <div class="page-view" id="page-myprofile">
         <div class="page-header"><div class="page-title">My Profile</div><div class="page-desc">// edit your public profile</div></div>
         <div class="settings-section">
-          <span class="settings-label">Avatar Color</span>
+          <span class="settings-label">Profile Picture</span>
           <div class="settings-card">
-            <div style="display:flex;align-items:center;gap:16px">
+            <div class="avatar-upload-zone" onclick="document.getElementById('avatar-file-input').click()">
               <div class="avatar lg" id="profile-preview-avatar"></div>
-              <div>
-                <div class="color-swatches" id="color-swatches"></div>
-                <div style="font-size:11px;color:var(--muted);font-family:'DM Mono',monospace;margin-top:8px">Your initial is shown when no photo is set.</div>
+              <div class="avatar-upload-info">
+                <div class="avatar-upload-title">Choose a photo</div>
+                <div class="avatar-upload-hint">JPG, PNG, GIF · Max 4 MB · Click to browse</div>
               </div>
             </div>
+            <div id="avatar-pending-name" style="display:none;font-size:12px;font-family:'DM Mono',monospace;color:var(--accent);margin-top:8px;padding:7px 10px;background:var(--accent-glow2);border-radius:var(--radius-sm)"></div>
+            <div class="avatar-progress" id="avatar-progress"><div class="avatar-progress-bar" id="avatar-progress-bar"></div></div>
+            <input type="file" id="avatar-file-input" accept="image/*" style="display:none" onchange="previewAvatar(this.files[0])">
+            <button class="btn-save" id="avatar-save-btn" style="margin-top:10px;width:auto;padding:9px 18px;display:none" onclick="uploadAvatar()">Save Profile Picture</button>
           </div>
         </div>
         <div class="settings-section">
-          <span class="settings-label">Display Name</span>
+          <span class="settings-label">Avatar Color</span>
           <div class="settings-card">
-            <div class="settings-row">
-              <input class="form-input" type="text" id="profile-nickname" placeholder="Your display name (max 32 chars)" maxlength="32">
-              <button class="btn-save" onclick="saveProfile()">Save</button>
-            </div>
-            <div class="settings-hint">Username cannot be changed. Display name appears on your profile.</div>
+            <div style="font-size:12px;color:var(--muted);font-family:'DM Mono',monospace;margin-bottom:8px">Shown when no photo is set.</div>
+            <div class="color-swatches" id="color-swatches"></div>
+            <button class="btn-save" style="margin-top:12px;width:auto;padding:9px 18px" onclick="saveProfile()">Save Color</button>
           </div>
         </div>
         <div class="settings-section">
-          <span class="settings-label">Bio</span>
+          <span class="settings-label">Display Name & Bio</span>
           <div class="settings-card">
-            <textarea id="profile-bio" style="width:100%;height:90px;resize:vertical;padding:11px 14px;background:var(--surface2);border:1px solid var(--border);border-radius:var(--radius-sm);color:var(--text);font-family:'DM Mono',monospace;font-size:13px;outline:none;transition:var(--transition)" placeholder="Tell others about yourself (max 300 chars)" maxlength="300"></textarea>
-            <div class="settings-hint" style="margin-top:8px">Shown on your public profile.</div>
+            <div class="form-group"><label class="form-label">Display Name</label><input class="form-input" type="text" id="profile-nickname" placeholder="Your display name" maxlength="32"></div>
+            <div class="form-group" style="margin-bottom:0"><label class="form-label">Bio</label><textarea id="profile-bio" style="width:100%;height:80px;resize:vertical;padding:10px 13px;background:var(--surface2);border:1px solid var(--border);border-radius:var(--radius-sm);color:var(--text);font-family:'DM Mono',monospace;font-size:13px;outline:none;transition:var(--transition)" placeholder="Tell others about yourself" maxlength="300"></textarea></div>
+            <button class="btn-save" style="margin-top:10px;width:auto;padding:9px 18px" onclick="saveProfile()">Save Profile</button>
+            <div class="settings-hint">Username cannot be changed.</div>
           </div>
         </div>
         <div class="settings-section">
           <span class="settings-label">Account Info</span>
           <div class="settings-card">
-            <div style="font-size:13px;font-family:'DM Mono',monospace;color:var(--muted);line-height:1.9">
-              Username: <strong style="color:var(--text)" id="myprofile-username">—</strong><br>
-              Role: <strong style="color:var(--accent)" id="myprofile-role">—</strong><br>
-              Joined: <strong style="color:var(--text)" id="myprofile-joined">—</strong>
+            <div style="font-size:13px;font-family:'DM Mono',monospace;color:var(--muted);line-height:2">
+              Username: <strong style="color:var(--text)" id="myprofile-username"></strong><br>
+              Role: <strong style="color:var(--accent)" id="myprofile-role"></strong><br>
+              Joined: <strong style="color:var(--text)" id="myprofile-joined"></strong>
             </div>
           </div>
         </div>
       </div>
 
-      <!-- SETTINGS PAGE -->
       <div class="page-view" id="page-settings">
         <div class="page-header"><div class="page-title">Settings</div><div class="page-desc">// app preferences</div></div>
         <div class="settings-section">
           <span class="settings-label">Navigation Layout</span>
           <div class="settings-card">
-            <div style="font-size:13px;color:var(--muted);font-family:'DM Mono',monospace;margin-bottom:12px">Choose where the navigation bar appears.</div>
+            <div style="font-size:13px;color:var(--muted);font-family:'DM Mono',monospace;margin-bottom:10px">Choose where the navigation bar appears.</div>
             <div class="layout-opts">
-              <button class="layout-opt" id="layout-top"   onclick="setLayout('top')">Top Bar</button>
-              <button class="layout-opt" id="layout-left"  onclick="setLayout('left')">Left Sidebar</button>
+              <button class="layout-opt" id="layout-top" onclick="setLayout('top')">Top Bar</button>
+              <button class="layout-opt" id="layout-left" onclick="setLayout('left')">Left Sidebar</button>
               <button class="layout-opt" id="layout-right" onclick="setLayout('right')">Right Sidebar</button>
             </div>
           </div>
         </div>
       </div>
 
-      <!-- OWNER PANEL PAGE -->
       <div class="page-view" id="page-panel">
         <div class="page-header"><div class="page-title">Owner Panel</div><div class="page-desc">// settings & inbox</div></div>
-        <div class="tab-row" style="margin-bottom:24px">
+        <div class="tab-row" style="margin-bottom:22px">
           <button class="tab-btn active" id="ptab-settings" onclick="switchPanelTab('settings')">Settings</button>
           <button class="tab-btn" id="ptab-inbox" onclick="switchPanelTab('inbox')">File Requests <span class="notif-dot" id="panel-inbox-dot" style="display:none"></span></button>
         </div>
@@ -539,55 +536,50 @@ body.topbar-mode .content-area{padding:36px 40px}
           </div>
           <div class="settings-section">
             <span class="settings-label">Session</span>
-            <div class="settings-card"><div style="font-size:13px;font-family:'DM Mono',monospace;color:var(--muted);line-height:1.8">Logged in as <strong style="color:var(--text)" id="panel-username">—</strong><br>Role: <strong style="color:var(--accent)">owner</strong><br>To change a user's role, edit users.json directly.</div></div>
+            <div class="settings-card"><div style="font-size:13px;font-family:'DM Mono',monospace;color:var(--muted);line-height:1.9">Logged in as <strong style="color:var(--text)" id="panel-username"></strong><br>Role: <strong style="color:var(--accent)">owner</strong></div></div>
           </div>
         </div>
         <div id="panel-inbox-tab" style="display:none">
           <div class="inbox-bulk" id="inbox-bulk" style="display:none">
-            <button class="btn-bulk" onclick="markAllRead()">✓ Mark all read</button>
-            <button class="btn-bulk danger" onclick="deleteAllInbox()">✕ Delete all</button>
+            <button class="btn-bulk" onclick="markAllRead()">Mark all read</button>
+            <button class="btn-bulk danger" onclick="deleteAllInbox()">Delete all</button>
           </div>
-          <div id="inbox-list"><div class="empty-state"><div class="empty-icon">◫</div><div class="empty-title">No requests</div></div></div>
+          <div id="inbox-list"><div class="empty-state"><div class="empty-icon">&#9633;</div><div class="empty-title">No requests</div></div></div>
         </div>
       </div>
 
-      <!-- USERS PAGE (owner only) -->
       <div class="page-view" id="page-users">
         <div class="page-header"><div class="page-title">Users</div><div class="page-desc">// manage all accounts</div></div>
-        <div id="users-list"><div class="empty-state"><div class="empty-icon">👥</div><div class="empty-title">Loading…</div></div></div>
+        <div id="users-list"><div class="empty-state"><div class="empty-icon">&#9675;</div><div class="empty-title">Loading</div></div></div>
       </div>
 
-    </div><!-- content-area -->
-  </div><!-- layout-wrap -->
-</div><!-- app-screen -->
+    </div>
+  </div>
+</div>
 
-<!-- ═══ DM CHATBOX ═══ -->
 <div id="dm-chatbox">
   <div class="chatbox-header">
     <div class="avatar sm" id="chatbox-avatar"></div>
     <div class="chatbox-title" id="chatbox-title">Chat</div>
-    <button class="chatbox-close" onclick="closeChatbox()">✕</button>
+    <button class="chatbox-close" onclick="closeChatbox()">x</button>
   </div>
   <div class="chatbox-messages" id="chatbox-messages"></div>
   <div class="chatbox-input">
-    <input type="text" id="chatbox-input" placeholder="Message…" onkeydown="if(event.key==='Enter')sendChatMsg()">
-    <button class="chatbox-send" onclick="sendChatMsg()">↑</button>
+    <input type="text" id="chatbox-input" placeholder="Message" onkeydown="if(event.key==='Enter')sendChatMsg()">
+    <button class="chatbox-send" onclick="sendChatMsg()">^</button>
   </div>
 </div>
 
-<!-- ═══ MODALS ═══ -->
-
-<!-- Request Modal -->
 <div class="modal-overlay" id="request-modal">
   <div class="modal">
-    <button class="modal-close" onclick="closeRequestModal()">✕</button>
+    <button class="modal-close" onclick="closeRequestModal()">x</button>
     <div class="modal-title">Send File Request</div>
     <div class="modal-sub">// upload your file first, then submit</div>
     <div class="form-group">
       <label class="form-label">File to Upload</label>
       <div class="req-file-pick" id="req-file-pick" onclick="document.getElementById('req-file-input').click()"><span id="req-file-label">Click to attach a file</span></div>
-      <div class="upload-progress" id="req-upload-progress" style="margin-top:10px"><div class="upload-progress-bar" id="req-upload-bar"></div></div>
-      <div class="upload-pct" id="req-upload-pct" style="margin-top:6px;text-align:center">0%</div>
+      <div class="upload-progress" id="req-upload-progress" style="margin-top:9px"><div class="upload-progress-bar" id="req-upload-bar"></div></div>
+      <div class="upload-pct" id="req-upload-pct" style="margin-top:5px;text-align:center">0%</div>
     </div>
     <div class="form-group">
       <label class="form-label">Reason</label>
@@ -595,41 +587,41 @@ body.topbar-mode .content-area{padding:36px 40px}
     </div>
     <div class="modal-actions">
       <button class="btn-cancel" onclick="closeRequestModal()">Cancel</button>
-      <button class="btn-submit" id="req-submit-btn" onclick="submitRequest()" disabled>Upload first…</button>
+      <button class="btn-submit" id="req-submit-btn" onclick="submitRequest()" disabled>Upload first</button>
     </div>
   </div>
 </div>
 
-<!-- File Detail Modal -->
 <div class="modal-overlay" id="detail-modal">
   <div class="modal" style="max-width:500px">
-    <button class="modal-close" onclick="closeDetailModal()">✕</button>
+    <button class="modal-close" onclick="closeDetailModal()">x</button>
     <div class="detail-header">
-      <div class="detail-ext" id="dm-ext"><div class="detail-ext-icon" id="dm-icon">📁</div><span id="dm-extlabel">—</span></div>
+      <div class="detail-ext" id="dm-ext"><div class="detail-ext-icon" style="font-size:10px;font-weight:700;color:var(--accent)" id="dm-icon">?</div><span id="dm-extlabel">—</span></div>
       <div><div class="detail-name" id="dm-name">—</div><div class="detail-meta" id="dm-meta">—</div></div>
     </div>
-    <div class="detail-section"><span class="detail-section-label">Description</span><div class="detail-desc-box" id="dm-desc"></div></div>
+    <div class="detail-section">
+      <span class="detail-section-label">Description</span>
+      <div id="desc-view-wrap">
+        <div class="detail-desc-box" id="dm-desc"></div>
+        <div style="margin-top:7px;display:flex;gap:7px">
+          <button class="btn-sm" id="desc-edit-btn" onclick="startEditDesc()">Edit description</button>
+        </div>
+      </div>
+      <div id="desc-edit-wrap" style="display:none">
+        <textarea class="detail-desc-edit" id="desc-edit-textarea" placeholder="Describe this file" maxlength="1000"></textarea>
+        <div style="margin-top:7px;display:flex;gap:7px">
+          <button class="btn-submit" style="flex:none;padding:7px 14px;font-size:12px" onclick="saveDescInline()">Save</button>
+          <button class="btn-cancel" style="flex:none;padding:7px 14px;font-size:12px" onclick="cancelEditDesc()">Cancel</button>
+        </div>
+      </div>
+    </div>
     <div class="detail-section"><span class="detail-section-label">Actions</span><div class="detail-actions" id="dm-actions"></div></div>
   </div>
 </div>
 
-<!-- Desc Prompt Modal -->
-<div class="modal-overlay" id="desc-modal">
-  <div class="modal" style="max-width:440px">
-    <div class="modal-title">Add a Description</div>
-    <div class="modal-sub" id="desc-modal-sub">// optional</div>
-    <textarea id="desc-input" style="width:100%;height:100px;resize:vertical;padding:11px 14px;background:var(--surface2);border:1px solid var(--border);border-radius:var(--radius-sm);color:var(--text);font-family:'DM Mono',monospace;font-size:13px;outline:none" placeholder="What is this file? (press Skip to leave blank)"></textarea>
-    <div class="modal-actions" style="margin-top:14px">
-      <button class="btn-cancel" onclick="skipDesc()">Skip</button>
-      <button class="btn-submit" onclick="saveDesc()">Save →</button>
-    </div>
-  </div>
-</div>
-
-<!-- Profile Modal -->
 <div class="modal-overlay" id="profile-modal">
   <div class="modal" style="max-width:520px">
-    <button class="modal-close" onclick="closeProfileModal()">✕</button>
+    <button class="modal-close" onclick="closeProfileModal()">x</button>
     <div class="profile-banner">
       <div class="avatar lg" id="pm-avatar"></div>
       <div class="profile-info">
@@ -640,18 +632,18 @@ body.topbar-mode .content-area{padding:36px 40px}
         <div class="profile-stat" id="pm-stat"></div>
       </div>
     </div>
+    <div id="pm-warn-info" style="display:none;margin-bottom:10px"></div>
     <div class="profile-actions" id="pm-actions"></div>
     <div class="profile-files" id="pm-files"></div>
   </div>
 </div>
 
-<!-- Warn Modal -->
 <div class="modal-overlay" id="warn-modal">
   <div class="modal" style="max-width:420px">
-    <button class="modal-close" onclick="document.getElementById('warn-modal').classList.remove('open')">✕</button>
+    <button class="modal-close" onclick="document.getElementById('warn-modal').classList.remove('open')">x</button>
     <div class="modal-title">Send Warning</div>
     <div class="modal-sub" id="warn-modal-sub">// to @username</div>
-    <div class="form-group"><label class="form-label">Warning Message</label><textarea id="warn-input" style="width:100%;height:80px;resize:vertical;padding:11px 14px;background:var(--surface2);border:1px solid var(--border);border-radius:var(--radius-sm);color:var(--text);font-family:'DM Mono',monospace;font-size:13px;outline:none" placeholder="Reason for this warning…"></textarea></div>
+    <div class="form-group"><label class="form-label">Warning Message</label><textarea id="warn-input" style="width:100%;height:80px;resize:vertical;padding:10px 13px;background:var(--surface2);border:1px solid var(--border);border-radius:var(--radius-sm);color:var(--text);font-family:'DM Mono',monospace;font-size:13px;outline:none" placeholder="Reason for this warning"></textarea></div>
     <div class="modal-actions"><button class="btn-cancel" onclick="document.getElementById('warn-modal').classList.remove('open')">Cancel</button><button class="btn-submit" id="warn-submit-btn">Send Warning</button></div>
   </div>
 </div>
@@ -659,40 +651,32 @@ body.topbar-mode .content-area{padding:36px 40px}
 <div class="toast-container" id="toast-container"></div>
 
 <script>
-// ═══════════════════════════════════════════════════════════
-//  CONFIG
-// ═══════════════════════════════════════════════════════════
 const API_KEY = 'YOURAPIKEY';
 let BACKEND_URL = localStorage.getItem('vault_backend_url') || '';
 
-// ═══════════════════════════════════════════════════════════
-//  STORAGE
-// ═══════════════════════════════════════════════════════════
-const getToken    = ()  => localStorage.getItem('vault_token') || '';
-const setToken    = t   => localStorage.setItem('vault_token', t);
-const clearToken  = ()  => localStorage.removeItem('vault_token');
+const getToken   = ()  => localStorage.getItem('vault_token') || '';
+const setToken   = t   => localStorage.setItem('vault_token', t);
+const clearToken = ()  => localStorage.removeItem('vault_token');
 
 async function sha256(s) {
   const b = await crypto.subtle.digest('SHA-256', new TextEncoder().encode(s));
-  return Array.from(new Uint8Array(b)).map(x=>x.toString(16).padStart(2,'0')).join('');
+  return Array.from(new Uint8Array(b)).map(x => x.toString(16).padStart(2,'0')).join('');
 }
 
-// ═══════════════════════════════════════════════════════════
-//  STATE
-// ═══════════════════════════════════════════════════════════
 let currentUser    = null;
 let currentProfile = null;
 let isOwner        = false;
+let _lastFilesMap  = {};
 let _lastFilesList = [];
 let _pendingDescFiles = [];
 let _currentDescFile  = null;
 let _chatThreadId  = null;
 let _chatWithUser  = null;
 let _chatPollTimer = null;
+let _currentDetailFileId = null;
+let _profileCache  = {};
+let _pendingAvatarFile = null;
 
-// ═══════════════════════════════════════════════════════════
-//  API
-// ═══════════════════════════════════════════════════════════
 function apiHeaders(extra={}) { return {'x-api-key':API_KEY,'x-token':getToken(),...extra}; }
 
 async function apiFetch(path, opts={}) {
@@ -706,15 +690,12 @@ function applyBackendUrl(url) {
   if (url && url !== BACKEND_URL) { BACKEND_URL = url; localStorage.setItem('vault_backend_url', url); }
 }
 
-// ═══════════════════════════════════════════════════════════
-//  LAYOUT
-// ═══════════════════════════════════════════════════════════
 let currentLayout = localStorage.getItem('vault_layout') || 'top';
 
 function setLayout(mode) {
   currentLayout = mode;
   localStorage.setItem('vault_layout', mode);
-  document.body.classList.remove('sidebar-left','sidebar-right','topbar-mode');
+  document.body.classList.remove('sidebar-left','sidebar-right');
   if (mode === 'left')  document.body.classList.add('sidebar-left');
   if (mode === 'right') document.body.classList.add('sidebar-right');
   document.querySelectorAll('.layout-opt').forEach(el => el.classList.remove('selected'));
@@ -722,9 +703,15 @@ function setLayout(mode) {
   if (el) el.classList.add('selected');
 }
 
-// ═══════════════════════════════════════════════════════════
-//  NAV
-// ═══════════════════════════════════════════════════════════
+function openMobileSidebar() {
+  document.getElementById('mobile-overlay').classList.add('open');
+  document.getElementById('mobile-sidebar').classList.add('open');
+}
+function closeMobileSidebar() {
+  document.getElementById('mobile-overlay').classList.remove('open');
+  document.getElementById('mobile-sidebar').classList.remove('open');
+}
+
 function navTo(page) {
   document.querySelectorAll('.page-view').forEach(p => p.classList.remove('active'));
   document.querySelectorAll('.sidebar-item').forEach(b => b.classList.remove('active'));
@@ -736,30 +723,40 @@ function navTo(page) {
   if (page === 'messages') loadDMThreads();
   if (page === 'users' && isOwner) loadUsers();
   if (page === 'myprofile') populateMyProfile();
-  if (page === 'files') loadFiles();
+  if (page === 'files') loadFilesQuiet();
 }
 
-// ═══════════════════════════════════════════════════════════
-//  AVATAR RENDER
-// ═══════════════════════════════════════════════════════════
 function renderAvatar(el, profile) {
   if (!el) return;
-  if (profile?.avatarUrl) {
-    el.innerHTML = `<img src="${BACKEND_URL}${profile.avatarUrl}?t=${Date.now()}" alt="">`;
+  if (profile && profile.avatarUrl) {
+    const src = profile.avatarUrl.startsWith('http') ? profile.avatarUrl : BACKEND_URL + profile.avatarUrl;
+    el.innerHTML = `<img src="${src}?t=${Date.now()}" alt="">`;
     el.style.background = 'transparent';
   } else {
-    el.innerHTML = (profile?.nickname || profile?.username || '?')[0].toUpperCase();
-    el.style.background = profile?.avatarColor || '#7c6fff';
+    el.innerHTML = ((profile && (profile.nickname || profile.username)) || '?')[0].toUpperCase();
+    el.style.background = (profile && profile.avatarColor) || '#7c6fff';
   }
 }
 
-// ═══════════════════════════════════════════════════════════
-//  AUTH FLOW
-// ═══════════════════════════════════════════════════════════
+async function fetchProfileCached(username) {
+  if (_profileCache[username]) return _profileCache[username];
+  try {
+    const data = await apiFetch(`/profile/${username}`);
+    _profileCache[username] = data.profile;
+    return data.profile;
+  } catch { return null; }
+}
+
+function updateAllAvatars() {
+  ['topbar-avatar','sidebar-avatar','profile-preview-avatar','mob-sidebar-avatar'].forEach(id => {
+    renderAvatar(document.getElementById(id), currentProfile);
+  });
+}
+
 function showAuthStep(step) {
-  document.getElementById('auth-server-step').style.display = step==='server' ? '' : 'none';
-  document.getElementById('auth-login-step').style.display  = step==='login'  ? '' : 'none';
-  if (step==='login') {
+  document.getElementById('auth-server-step').style.display = step === 'server' ? '' : 'none';
+  document.getElementById('auth-login-step').style.display  = step === 'login'  ? '' : 'none';
+  if (step === 'login') {
     const s = BACKEND_URL.replace(/^https?:\/\//,'').replace(/:\d+$/,'');
     document.getElementById('auth-subtitle-url').textContent = '// connected to ' + s;
   }
@@ -773,28 +770,28 @@ async function authConnect() {
   if (!val) { errEl.textContent = 'Enter a URL.'; return; }
   btn.disabled = true; btn.textContent = 'Connecting…';
   try {
-    const r = await fetch(val+'/health', { signal: AbortSignal.timeout(6000) });
+    const r = await fetch(val + '/health', { signal: AbortSignal.timeout(6000) });
     const d = await r.json();
     if (!d.ok) throw new Error();
     BACKEND_URL = val; localStorage.setItem('vault_backend_url', val);
     showAuthStep('login');
   } catch { errEl.textContent = 'Cannot reach server.'; }
-  finally { btn.disabled=false; btn.textContent='Connect →'; }
+  finally { btn.disabled = false; btn.textContent = 'Connect'; }
 }
 
 function authDisconnect() {
-  BACKEND_URL=''; localStorage.removeItem('vault_backend_url');
-  document.getElementById('auth-server-url').value='';
+  BACKEND_URL = ''; localStorage.removeItem('vault_backend_url');
+  document.getElementById('auth-server-url').value = '';
   showAuthStep('server');
 }
 
 let activeTab = 'login';
 function switchTab(tab) {
   activeTab = tab;
-  document.getElementById('login-form').style.display  = tab==='login'  ? '' : 'none';
-  document.getElementById('signup-form').style.display = tab==='signup' ? '' : 'none';
-  document.querySelectorAll('.tab-btn').forEach((b,i)=>{
-    b.classList.toggle('active',(i===0&&tab==='login')||(i===1&&tab==='signup'));
+  document.getElementById('login-form').style.display  = tab === 'login'  ? '' : 'none';
+  document.getElementById('signup-form').style.display = tab === 'signup' ? '' : 'none';
+  document.querySelectorAll('.tab-btn').forEach((b,i) => {
+    b.classList.toggle('active', (i===0&&tab==='login') || (i===1&&tab==='signup'));
   });
 }
 
@@ -803,17 +800,17 @@ async function doLogin() {
   const password = document.getElementById('login-pass').value;
   const errEl = document.getElementById('login-error');
   const btn   = document.getElementById('login-btn');
-  errEl.textContent='';
-  if (!username||!password) { errEl.textContent='All fields required.'; return; }
-  btn.disabled=true; btn.textContent='Signing in…';
+  errEl.textContent = '';
+  if (!username || !password) { errEl.textContent = 'All fields required.'; return; }
+  btn.disabled = true; btn.textContent = 'Signing in…';
   try {
-    const hash = await sha256(password+username+'vault_salt_2024');
-    const data = await apiFetch('/login',{ method:'POST', headers:{'Content-Type':'application/json'}, body:JSON.stringify({username,hash}) });
+    const hash = await sha256(password + username + 'vault_salt_2024');
+    const data = await apiFetch('/login', { method:'POST', headers:{'Content-Type':'application/json'}, body:JSON.stringify({username,hash}) });
     applyBackendUrl(data.backendUrl);
     setToken(data.token);
     enterApp(data.username, data.role, data.profile);
-  } catch(e) { errEl.textContent=e.message; }
-  finally { btn.disabled=false; btn.textContent='Sign In →'; }
+  } catch(e) { errEl.textContent = e.message; }
+  finally { btn.disabled = false; btn.textContent = 'Sign In'; }
 }
 
 async function doSignup() {
@@ -822,60 +819,58 @@ async function doSignup() {
   const password2 = document.getElementById('signup-pass2').value;
   const errEl = document.getElementById('signup-error');
   const btn   = document.getElementById('signup-btn');
-  errEl.textContent='';
-  if (!username||!password||!password2) { errEl.textContent='All fields required.'; return; }
-  if (!/^[a-z0-9_]{3,20}$/.test(username)) { errEl.textContent='Username: 3-20 chars, a-z/0-9/_.'; return; }
-  if (password.length<6) { errEl.textContent='Password min 6 characters.'; return; }
-  if (password!==password2) { errEl.textContent='Passwords do not match.'; return; }
-  btn.disabled=true; btn.textContent='Creating…';
+  errEl.textContent = '';
+  if (!username || !password || !password2) { errEl.textContent = 'All fields required.'; return; }
+  if (!/^[a-z0-9_]{3,20}$/.test(username)) { errEl.textContent = 'Username: 3-20 chars, a-z/0-9/_.'; return; }
+  if (password.length < 6) { errEl.textContent = 'Password min 6 characters.'; return; }
+  if (password !== password2) { errEl.textContent = 'Passwords do not match.'; return; }
+  btn.disabled = true; btn.textContent = 'Creating…';
   try {
-    const hash = await sha256(password+username+'vault_salt_2024');
-    const data = await apiFetch('/signup',{ method:'POST', headers:{'Content-Type':'application/json'}, body:JSON.stringify({username,hash}) });
+    const hash = await sha256(password + username + 'vault_salt_2024');
+    const data = await apiFetch('/signup', { method:'POST', headers:{'Content-Type':'application/json'}, body:JSON.stringify({username,hash}) });
     applyBackendUrl(data.backendUrl);
     setToken(data.token);
-    if (data.role==='owner') toast('You are the Vault owner! 👑','success');
+    if (data.role === 'owner') toast('You are the Vault owner!', 'success');
     enterApp(data.username, data.role, data.profile);
-  } catch(e) { errEl.textContent=e.message; }
-  finally { btn.disabled=false; btn.textContent='Create Account →'; }
+  } catch(e) { errEl.textContent = e.message; }
+  finally { btn.disabled = false; btn.textContent = 'Create Account'; }
 }
 
 function doLogout() {
   stopPolling(); clearToken();
-  currentUser=null; isOwner=false; currentProfile=null;
+  currentUser = null; isOwner = false; currentProfile = null; _profileCache = {}; _pendingAvatarFile = null;
   closeChatbox();
   document.getElementById('app-screen').classList.remove('active');
   document.getElementById('auth-screen').classList.add('active');
-  document.getElementById('login-user').value='';
-  document.getElementById('login-pass').value='';
+  document.getElementById('login-user').value = '';
+  document.getElementById('login-pass').value = '';
   showAuthStep(BACKEND_URL ? 'login' : 'server');
-  toast('Signed out.','info');
+  toast('Signed out.', 'info');
 }
 
-// ═══════════════════════════════════════════════════════════
-//  APP ENTRY
-// ═══════════════════════════════════════════════════════════
 function enterApp(username, role, profile) {
   currentUser    = username;
   isOwner        = role === 'owner';
   currentProfile = profile || {};
+  _profileCache[username] = currentProfile;
 
-  // Update all avatar instances
-  ['topbar-avatar','sidebar-avatar','profile-preview-avatar'].forEach(id => {
-    renderAvatar(document.getElementById(id), currentProfile);
-  });
-
-  document.getElementById('user-label').textContent     = profile?.nickname || username;
-  document.getElementById('sidebar-username').textContent = profile?.nickname || username;
-  document.getElementById('sidebar-role').textContent   = role;
-  document.getElementById('owner-badge').style.display  = isOwner ? '' : 'none';
-  document.getElementById('owner-info-bar').style.display = isOwner ? '' : 'none';
-  document.getElementById('topbar-panel-btn').style.display = isOwner ? '' : 'none';
-  document.getElementById('snav-panel').style.display   = isOwner ? '' : 'none';
-  document.getElementById('snav-users').style.display   = isOwner ? '' : 'none';
-
-  document.getElementById('page-desc').textContent = `// ${isOwner?'owner · ':''}hello, ${profile?.nickname||username}`;
-  document.getElementById('upload-zone').style.display  = isOwner ? '' : 'none';
-  document.getElementById('request-zone').style.display = isOwner ? 'none' : '';
+  updateAllAvatars();
+  document.getElementById('user-label').textContent          = profile && profile.nickname ? profile.nickname : username;
+  document.getElementById('sidebar-username').textContent    = profile && profile.nickname ? profile.nickname : username;
+  document.getElementById('mob-sidebar-username').textContent = profile && profile.nickname ? profile.nickname : username;
+  document.getElementById('sidebar-role').textContent        = role;
+  document.getElementById('mob-sidebar-role').textContent    = role;
+  document.getElementById('owner-badge').style.display       = isOwner ? '' : 'none';
+  document.getElementById('owner-info-bar').style.display    = isOwner ? '' : 'none';
+  document.getElementById('topbar-panel-btn').style.display  = isOwner ? '' : 'none';
+  document.getElementById('snav-panel').style.display        = isOwner ? '' : 'none';
+  document.getElementById('snav-users').style.display        = isOwner ? '' : 'none';
+  document.getElementById('mob-snav-panel').style.display    = isOwner ? '' : 'none';
+  document.getElementById('mob-snav-users').style.display    = isOwner ? '' : 'none';
+  document.getElementById('panel-username').textContent      = username;
+  document.getElementById('page-desc').textContent           = `// ${isOwner?'owner · ':''}hello, ${profile && profile.nickname ? profile.nickname : username}`;
+  document.getElementById('upload-zone').style.display       = isOwner ? '' : 'none';
+  document.getElementById('request-zone').style.display      = isOwner ? 'none' : '';
 
   document.getElementById('auth-screen').classList.remove('active');
   document.getElementById('app-screen').classList.add('active');
@@ -889,84 +884,113 @@ function enterApp(username, role, profile) {
   checkDMDot();
 }
 
-// ═══════════════════════════════════════════════════════════
-//  MY PROFILE
-// ═══════════════════════════════════════════════════════════
 const AVATAR_COLORS = ['#7c6fff','#5b4fff','#4ade80','#f87171','#fbbf24','#38bdf8','#f472b6','#a78bfa','#fb923c','#34d399'];
 
 function initColorSwatches() {
   const cont = document.getElementById('color-swatches');
-  cont.innerHTML = AVATAR_COLORS.map(c => `<div class="color-swatch${(currentProfile?.avatarColor||'#7c6fff')===c?' selected':''}" style="background:${c}" onclick="selectColor('${c}')"></div>`).join('');
+  const cur  = (currentProfile && currentProfile.avatarColor) || '#7c6fff';
+  cont.innerHTML = AVATAR_COLORS.map(c => `<div class="color-swatch${cur===c?' selected':''}" style="background:${c}" onclick="selectColor('${c}')"></div>`).join('');
 }
 
 function selectColor(c) {
-  document.querySelectorAll('.color-swatch').forEach(s => s.classList.toggle('selected', s.style.background===c||s.style.backgroundColor===c));
+  document.querySelectorAll('.color-swatch').forEach(s => {
+    s.classList.toggle('selected', s.style.background === c);
+  });
   currentProfile = currentProfile || {};
   currentProfile.avatarColor = c;
-  ['topbar-avatar','sidebar-avatar','profile-preview-avatar'].forEach(id => renderAvatar(document.getElementById(id), currentProfile));
+  updateAllAvatars();
 }
 
 function populateMyProfile() {
   if (!currentProfile) return;
-  document.getElementById('profile-nickname').value  = currentProfile.nickname || '';
-  document.getElementById('profile-bio').value       = currentProfile.bio      || '';
+  document.getElementById('profile-nickname').value         = currentProfile.nickname || '';
+  document.getElementById('profile-bio').value             = currentProfile.bio || '';
   document.getElementById('myprofile-username').textContent = currentUser || '';
   document.getElementById('myprofile-role').textContent     = isOwner ? 'owner' : 'user';
   document.getElementById('myprofile-joined').textContent   = currentProfile.created ? fmtDateTime(currentProfile.created) : '—';
-  renderAvatar(document.getElementById('profile-preview-avatar'), currentProfile);
+  updateAllAvatars();
 }
 
 async function saveProfile() {
-  const nickname     = document.getElementById('profile-nickname').value.trim();
-  const bio          = document.getElementById('profile-bio').value.trim();
-  const avatarColor  = currentProfile?.avatarColor || '#7c6fff';
+  const nickname    = document.getElementById('profile-nickname').value.trim();
+  const bio         = document.getElementById('profile-bio').value.trim();
+  const avatarColor = (currentProfile && currentProfile.avatarColor) || '#7c6fff';
   try {
-    const data = await apiFetch('/profile',{ method:'PATCH', headers:{'Content-Type':'application/json'}, body:JSON.stringify({nickname,bio,avatarColor}) });
+    const data = await apiFetch('/profile', { method:'PATCH', headers:{'Content-Type':'application/json'}, body:JSON.stringify({nickname,bio,avatarColor}) });
     currentProfile = data.profile;
-    ['topbar-avatar','sidebar-avatar','profile-preview-avatar'].forEach(id => renderAvatar(document.getElementById(id), currentProfile));
-    document.getElementById('user-label').textContent      = data.profile.nickname || currentUser;
+    _profileCache[currentUser] = currentProfile;
+    updateAllAvatars();
+    document.getElementById('user-label').textContent = data.profile.nickname || currentUser;
     document.getElementById('sidebar-username').textContent = data.profile.nickname || currentUser;
-    toast('Profile saved ✓','success');
-  } catch(e) { toast('Error: '+e.message,'error'); }
+    document.getElementById('mob-sidebar-username').textContent = data.profile.nickname || currentUser;
+    toast('Profile saved', 'success');
+  } catch(e) { toast('Error: ' + e.message, 'error'); }
 }
 
-// ═══════════════════════════════════════════════════════════
-//  BACKEND URL (owner panel)
-// ═══════════════════════════════════════════════════════════
+function previewAvatar(file) {
+  if (!file) return;
+  _pendingAvatarFile = file;
+  const reader = new FileReader();
+  reader.onload = e => {
+    const prev = document.getElementById('profile-preview-avatar');
+    if (prev) { prev.innerHTML = `<img src="${e.target.result}" alt="">`; prev.style.background = 'transparent'; }
+  };
+  reader.readAsDataURL(file);
+  const nameEl = document.getElementById('avatar-pending-name');
+  if (nameEl) { nameEl.textContent = 'Selected: ' + file.name; nameEl.style.display = ''; }
+  const saveBtn = document.getElementById('avatar-save-btn');
+  if (saveBtn) saveBtn.style.display = '';
+}
+
+async function uploadAvatar() {
+  const file = _pendingAvatarFile;
+  if (!file) return;
+  const prog    = document.getElementById('avatar-progress');
+  const bar     = document.getElementById('avatar-progress-bar');
+  const saveBtn = document.getElementById('avatar-save-btn');
+  const nameEl  = document.getElementById('avatar-pending-name');
+  prog.style.display = 'block'; bar.style.width = '0%';
+  if (saveBtn) saveBtn.disabled = true;
+  try {
+    const form = new FormData(); form.append('avatar', file);
+    const data = await xhrUpload(BACKEND_URL + '/profile/avatar', form, pct => { bar.style.width = Math.round(pct*100)+'%'; });
+    bar.style.width = '100%';
+    setTimeout(() => { prog.style.display = 'none'; bar.style.width = '0%'; }, 600);
+    currentProfile = currentProfile || {};
+    currentProfile.avatarUrl = data.avatarUrl;
+    _profileCache[currentUser] = Object.assign({}, currentProfile);
+    updateAllAvatars();
+    _pendingAvatarFile = null;
+    if (nameEl) nameEl.style.display = 'none';
+    if (saveBtn) { saveBtn.style.display = 'none'; saveBtn.disabled = false; }
+    document.getElementById('avatar-file-input').value = '';
+    toast('Avatar updated', 'success');
+  } catch(e) {
+    prog.style.display = 'none';
+    if (saveBtn) saveBtn.disabled = false;
+    toast('Avatar upload failed: ' + e.message, 'error');
+  }
+}
+
 async function saveBackendUrl() {
   const val = document.getElementById('settings-backend-url').value.trim().replace(/\/$/,'');
-  if (!val) { toast('Enter a URL.','error'); return; }
+  if (!val) { toast('Enter a URL.', 'error'); return; }
   try {
-    const r = await fetch(val+'/health',{ signal:AbortSignal.timeout(5000) });
+    const r = await fetch(val + '/health', { signal: AbortSignal.timeout(5000) });
     if (!(await r.json()).ok) throw new Error();
-    await apiFetch('/settings/backend-url',{ method:'POST', headers:{'Content-Type':'application/json'}, body:JSON.stringify({url:val}) });
-    applyBackendUrl(val); toast('Backend URL saved ✓','success');
-  } catch { toast('Cannot reach that server.','error'); }
+    await apiFetch('/settings/backend-url', { method:'POST', headers:{'Content-Type':'application/json'}, body:JSON.stringify({url:val}) });
+    applyBackendUrl(val); toast('Backend URL saved', 'success');
+  } catch { toast('Cannot reach that server.', 'error'); }
 }
 
-// ═══════════════════════════════════════════════════════════
-//  FILES
-// ═══════════════════════════════════════════════════════════
 function getExtIcon(ext) {
-  if (!ext) return '📁';
-  const m={pdf:'📄',jpg:'🖼',jpeg:'🖼',png:'🖼',gif:'🖼',webp:'🖼',svg:'🖼',mp4:'🎬',mov:'🎬',avi:'🎬',mkv:'🎬',webm:'🎬',mp3:'🎵',wav:'🎵',flac:'🎵',ogg:'🎵',zip:'📦',rar:'📦',tar:'📦',gz:'📦','7z':'📦',js:'⚙️',ts:'⚙️',py:'⚙️',html:'⚙️',css:'⚙️',json:'⚙️',sh:'⚙️',txt:'📝',md:'📝',doc:'📝',docx:'📝',xls:'📊',xlsx:'📊',csv:'📊',ppt:'📋',pptx:'📋',exe:'💿',apk:'💿',dmg:'💿'};
-  return m[ext.toLowerCase()]||'📁';
+  if (!ext) return '?'; return ext.toUpperCase().slice(0,3);
 }
-function fmtBytes(b){if(!b)return'0 B';const k=1024,s=['B','KB','MB','GB'],i=Math.floor(Math.log(b)/Math.log(k));return parseFloat((b/Math.pow(k,i)).toFixed(1))+' '+s[i]}
-function fmtDate(ts){return new Date(ts).toLocaleDateString('en-IE',{day:'2-digit',month:'short',year:'numeric'})}
-function fmtDateTime(ts){return new Date(ts).toLocaleString('en-IE',{day:'2-digit',month:'short',year:'numeric',hour:'2-digit',minute:'2-digit'})}
-function esc(s){return String(s).replace(/&/g,'&amp;').replace(/</g,'&lt;').replace(/>/g,'&gt;').replace(/"/g,'&quot;').replace(/'/g,'&#39;')}
+function fmtBytes(b) { if(!b)return'0 B'; const k=1024,s=['B','KB','MB','GB'],i=Math.floor(Math.log(b)/Math.log(k)); return parseFloat((b/Math.pow(k,i)).toFixed(1))+' '+s[i]; }
+function fmtDate(ts)     { return new Date(ts).toLocaleDateString('en-IE',{day:'2-digit',month:'short',year:'numeric'}); }
+function fmtDateTime(ts) { return new Date(ts).toLocaleString('en-IE',{day:'2-digit',month:'short',year:'numeric',hour:'2-digit',minute:'2-digit'}); }
+function esc(s) { return String(s).replace(/&/g,'&amp;').replace(/</g,'&lt;').replace(/>/g,'&gt;').replace(/"/g,'&quot;').replace(/'/g,'&#39;'); }
 
-async function loadFiles() {
-  if (!BACKEND_URL) return;
-  try {
-    const data = await apiFetch('/files');
-    isOwner = data.role === 'owner';
-    renderFiles(data.files || []);
-  } catch(e) { toast('Could not load files: '+e.message,'error'); }
-}
-
-// XHR-based upload with real % progress
 function xhrUpload(url, formData, onProgress) {
   return new Promise((resolve, reject) => {
     const xhr = new XMLHttpRequest();
@@ -982,32 +1006,184 @@ function xhrUpload(url, formData, onProgress) {
   });
 }
 
+async function loadFiles() {
+  if (!BACKEND_URL) return;
+  try {
+    const data = await apiFetch('/files');
+    isOwner = data.role === 'owner';
+    renderFiles(data.files || []);
+  } catch(e) { toast('Could not load files: ' + e.message, 'error'); }
+}
+
+function renderFiles(files) {
+  _lastFilesMap  = {};
+  _lastFilesList = files;
+  files.forEach(f => { _lastFilesMap[f.id] = f; });
+  files.sort((a,b) => { if(a.pinned&&!b.pinned)return -1; if(!a.pinned&&b.pinned)return 1; return b.uploaded-a.uploaded; });
+  document.getElementById('stat-total').textContent   = files.length;
+  document.getElementById('stat-public').textContent  = files.filter(f=>f.public).length;
+  document.getElementById('stat-private').textContent = files.filter(f=>!f.public).length;
+  document.getElementById('files-count').textContent  = `${files.length} item${files.length!==1?'s':''}`;
+  const listEl = document.getElementById('file-list');
+  listEl.innerHTML = '';
+  if (!files.length) {
+    listEl.innerHTML = `<div class="empty-state"><div class="empty-icon">&#9633;</div><div class="empty-title">No files yet</div><div class="empty-desc">Upload something to get started</div></div>`;
+    return;
+  }
+  files.forEach((f,i) => listEl.appendChild(buildFileItem(f,i)));
+}
+
+function buildFileItem(f, i) {
+  const el  = document.createElement('div');
+  el.className = 'file-item' + (f.pinned ? ' pinned' : '');
+  el.dataset.id = f.id;
+  const ext = f.ext || '—';
+  const canDl  = f.public || f.owner === currentUser || isOwner;
+  const canDel = f.owner === currentUser || isOwner;
+  const myUp   = (f.votes && f.votes.up  || []).includes(currentUser);
+  const myDn   = (f.votes && f.votes.down|| []).includes(currentUser);
+  const upCt   = (f.votes && f.votes.up  || []).length;
+  const dnCt   = (f.votes && f.votes.down|| []).length;
+  const showVotes = f.public || isOwner;
+  const sn = f.name.replace(/'/g,"\\'");
+  const avatarId = `uav-${f.id}`;
+  el.innerHTML = `
+    <div class="file-ext"><div style="font-size:9px;font-weight:700;color:var(--accent)">${esc(ext.toUpperCase().slice(0,3))}</div></div>
+    <div class="file-info">
+      <div class="file-name">
+        <span class="file-name-link" onclick="openDetailModal('${f.id}')">${esc(f.name)}</span>
+        ${f.pinned ? '<span class="pin-badge">Pinned</span>' : ''}
+      </div>
+      <div class="file-meta" style="display:flex;align-items:center;gap:5px">
+        ${fmtBytes(f.size)} &middot; ${fmtDate(f.uploaded)} &middot;
+        <div class="avatar sm" id="${avatarId}" style="width:18px;height:18px;font-size:8px;flex-shrink:0"></div>
+        <span class="uploader-link" onclick="openProfileModal('${esc(f.owner)}')">${esc(f.owner)}</span>
+      </div>
+    </div>
+    <div class="file-actions">
+      <span class="visibility-badge ${f.public?'badge-public':'badge-private'}">${f.public?'Public':'Private'}</span>
+      ${showVotes ? `<div class="vote-group"><button class="btn-vote up${myUp?' voted':''}" id="up-${f.id}" onclick="castVote('${f.id}','up')">^ <span class="vote-count">${upCt}</span></button><button class="btn-vote down${myDn?' voted':''}" id="down-${f.id}" onclick="castVote('${f.id}','down')">v <span class="vote-count">${dnCt}</span></button></div>` : ''}
+      ${canDl  ? `<button class="btn-sm dl" onclick="downloadFile('${f.id}','${sn}')">Download</button>` : ''}
+      ${isOwner ? `<button class="btn-sm tog" onclick="toggleVisibility('${f.id}')">${f.public?'Make Private':'Make Public'}</button>` : ''}
+      ${isOwner ? `<button class="btn-sm pin${f.pinned?' active':''}" onclick="togglePin('${f.id}')">Pin</button>` : ''}
+      ${canDel  ? `<button class="btn-sm del" onclick="deleteFile('${f.id}','${sn}')">x</button>` : ''}
+    </div>`;
+  const avatarEl = el.querySelector(`#${avatarId}`);
+  if (f.owner === currentUser && currentProfile) {
+    renderAvatar(avatarEl, currentProfile);
+  } else if (_profileCache[f.owner]) {
+    renderAvatar(avatarEl, _profileCache[f.owner]);
+  } else {
+    avatarEl.textContent = f.owner[0].toUpperCase();
+    avatarEl.style.background = '#7c6fff';
+    fetchProfileCached(f.owner).then(p => { if (p) renderAvatar(avatarEl, p); });
+  }
+  return el;
+}
+
+function patchFileItem(el, f) {
+  if (!el) return;
+  const badge = el.querySelector('.visibility-badge');
+  if (badge) {
+    badge.className = `visibility-badge ${f.public?'badge-public':'badge-private'}`;
+    badge.textContent = f.public ? 'Public' : 'Private';
+  }
+  const upEl = el.querySelector('.btn-vote.up');
+  const dnEl = el.querySelector('.btn-vote.down');
+  if (upEl) { upEl.querySelector('.vote-count').textContent = (f.votes&&f.votes.up||[]).length; upEl.classList.toggle('voted',(f.votes&&f.votes.up||[]).includes(currentUser)); }
+  if (dnEl) { dnEl.querySelector('.vote-count').textContent = (f.votes&&f.votes.down||[]).length; dnEl.classList.toggle('voted',(f.votes&&f.votes.down||[]).includes(currentUser)); }
+  el.classList.toggle('pinned', !!f.pinned);
+  const pinBtn = el.querySelector('.btn-sm.pin');
+  if (pinBtn) pinBtn.classList.toggle('active', !!f.pinned);
+  const pinBadge = el.querySelector('.pin-badge');
+  if (pinBadge && !f.pinned) pinBadge.remove();
+  else if (!pinBadge && f.pinned) {
+    const nameEl = el.querySelector('.file-name');
+    if (nameEl) { const pb = document.createElement('span'); pb.className='pin-badge'; pb.textContent='Pinned'; nameEl.appendChild(pb); }
+  }
+}
+
+async function loadFilesQuiet() {
+  if (!BACKEND_URL) return;
+  try {
+    const data  = await apiFetch('/files');
+    const files = data.files || [];
+    const newMap = {};
+    files.forEach(f => { newMap[f.id] = f; });
+    files.sort((a,b) => { if(a.pinned&&!b.pinned)return -1; if(!a.pinned&&b.pinned)return 1; return b.uploaded-a.uploaded; });
+
+    document.getElementById('stat-total').textContent   = files.length;
+    document.getElementById('stat-public').textContent  = files.filter(f=>f.public).length;
+    document.getElementById('stat-private').textContent = files.filter(f=>!f.public).length;
+    document.getElementById('files-count').textContent  = `${files.length} item${files.length!==1?'s':''}`;
+
+    const listEl = document.getElementById('file-list');
+    const existingIds = new Set(Array.from(listEl.querySelectorAll('.file-item')).map(el => el.dataset.id));
+    const newIds = new Set(files.map(f => f.id));
+
+    existingIds.forEach(id => {
+      if (!newIds.has(id)) {
+        const el = listEl.querySelector(`[data-id="${id}"]`);
+        if (el) {
+          el.style.transition = 'opacity 0.2s,transform 0.2s';
+          el.style.opacity = '0'; el.style.transform = 'translateX(-6px)';
+          setTimeout(() => el.remove(), 220);
+        }
+      }
+    });
+
+    files.forEach((f, i) => {
+      const existing = listEl.querySelector(`[data-id="${f.id}"]`);
+      if (existing) {
+        patchFileItem(existing, f);
+      } else {
+        const el = buildFileItem(f, i);
+        el.style.opacity = '0'; el.style.transform = 'translateY(8px)'; el.style.transition = 'none';
+        listEl.appendChild(el);
+        requestAnimationFrame(() => {
+          el.style.transition = 'opacity 0.25s ease, transform 0.25s ease';
+          el.style.opacity = '1'; el.style.transform = 'translateY(0)';
+        });
+      }
+    });
+
+    const ordered = files.map(f => listEl.querySelector(`[data-id="${f.id}"]`)).filter(Boolean);
+    ordered.forEach(el => listEl.appendChild(el));
+
+    if (!files.length && !listEl.querySelector('.empty-state')) {
+      listEl.innerHTML = `<div class="empty-state"><div class="empty-icon">&#9633;</div><div class="empty-title">No files yet</div><div class="empty-desc">Upload something to get started</div></div>`;
+    }
+
+    _lastFilesList = files;
+    _lastFilesMap  = newMap;
+  } catch {}
+}
+
 async function handleFileInput(files) {
-  if (!files?.length) return;
-  const prog   = document.getElementById('upload-progress');
-  const bar    = document.getElementById('upload-progress-bar');
-  const pctEl  = document.getElementById('upload-pct');
+  if (!files || !files.length) return;
+  const prog  = document.getElementById('upload-progress');
+  const bar   = document.getElementById('upload-progress-bar');
+  const pctEl = document.getElementById('upload-pct');
   prog.style.display = 'block'; pctEl.style.display = 'block';
   bar.style.width = '0%'; pctEl.textContent = '0%';
   try {
     const form = new FormData();
     Array.from(files).forEach(f => form.append('files', f));
-    const data = await xhrUpload(BACKEND_URL+'/upload', form, pct => {
-      const p = Math.round(pct * 100);
-      bar.style.width = p+'%'; pctEl.textContent = p+'%';
+    const data = await xhrUpload(BACKEND_URL + '/upload', form, pct => {
+      const p = Math.round(pct * 100); bar.style.width = p+'%'; pctEl.textContent = p+'%';
     });
     bar.style.width = '100%'; pctEl.textContent = '100%';
     setTimeout(() => { prog.style.display='none'; pctEl.style.display='none'; bar.style.width='0%'; }, 600);
-    if (data.uploaded?.length) { _pendingDescFiles = data.uploaded.slice(); openNextDescPrompt(); }
-    else { toast('Upload complete.','success'); loadFiles(); }
+    if (data.uploaded && data.uploaded.length) { _pendingDescFiles = data.uploaded.slice(); openNextDescPrompt(); }
+    else { toast('Upload complete.', 'success'); loadFilesQuiet(); }
   } catch(e) { prog.style.display='none'; pctEl.style.display='none'; toast('Upload failed: '+e.message,'error'); }
   document.getElementById('file-input').value = '';
 }
 
 async function downloadFile(id, name) {
   try {
-    toast(`Downloading "${name}"…`,'info');
-    const res = await fetch(BACKEND_URL+'/download/'+id,{headers:apiHeaders()});
+    toast(`Downloading "${name}"…`, 'info');
+    const res = await fetch(BACKEND_URL + '/download/' + id, { headers: apiHeaders() });
     if (!res.ok) { const b=await res.json().catch(()=>({})); throw new Error(b.error||`HTTP ${res.status}`); }
     const blob = await res.blob();
     const url  = URL.createObjectURL(blob);
@@ -1017,123 +1193,180 @@ async function downloadFile(id, name) {
 }
 
 async function toggleVisibility(id) {
-  try { const d=await apiFetch(`/files/${id}/visibility`,{method:'POST'}); toast(`File is now ${d.public?'Public':'Private'}.`,'info'); loadFiles(); }
-  catch(e) { toast('Error: '+e.message,'error'); }
-}
-async function togglePin(id) {
-  try { const d=await apiFetch(`/files/${id}/pin`,{method:'POST'}); toast(d.pinned?'Pinned 📌':'Unpinned.','info'); loadFiles(); }
-  catch(e) { toast('Error: '+e.message,'error'); }
-}
-async function deleteFile(id,name) {
-  try { await apiFetch(`/files/${id}`,{method:'DELETE'}); toast(`"${name}" deleted.`,'info'); loadFiles(); }
-  catch(e) { toast('Delete failed: '+e.message,'error'); }
-}
-
-async function castVote(id, dir) {
-  const upEl=document.getElementById(`up-${id}`), dnEl=document.getElementById(`down-${id}`);
-  const wasUp=upEl?.classList.contains('voted'), wasDn=dnEl?.classList.contains('voted');
-  const vote=(dir==='up'&&wasUp)||(dir==='down'&&wasDn) ? null : dir;
   try {
-    const d=await apiFetch(`/files/${id}/vote`,{method:'POST',headers:{'Content-Type':'application/json'},body:JSON.stringify({vote})});
-    if(upEl){upEl.querySelector('.vote-count').textContent=d.up; upEl.classList.toggle('voted',vote==='up');}
-    if(dnEl){dnEl.querySelector('.vote-count').textContent=d.down; dnEl.classList.toggle('voted',vote==='down');}
-  } catch(e) { toast('Vote failed: '+e.message,'error'); }
+    const d = await apiFetch(`/files/${id}/visibility`, {method:'POST'});
+    toast(`File is now ${d.public?'Public':'Private'}.`, 'info');
+    const f = _lastFilesMap[id];
+    if (f) { f.public = d.public; patchFileItem(document.querySelector(`[data-id="${id}"]`), f); }
+  } catch(e) { toast('Error: '+e.message,'error'); }
 }
 
-function renderFiles(files) {
-  _lastFilesList = files;
-  const listEl = document.getElementById('file-list');
-  files.sort((a,b)=>{if(a.pinned&&!b.pinned)return-1;if(!a.pinned&&b.pinned)return 1;return b.uploaded-a.uploaded});
+async function togglePin(id) {
+  try {
+    const d = await apiFetch(`/files/${id}/pin`, {method:'POST'});
+    toast(d.pinned ? 'Pinned' : 'Unpinned.', 'info');
+    const f = _lastFilesMap[id];
+    if (f) { f.pinned = d.pinned; patchFileItem(document.querySelector(`[data-id="${id}"]`), f); }
+    loadFilesQuiet();
+  } catch(e) { toast('Error: '+e.message,'error'); }
+}
+
+async function deleteFile(id, name) {
+  try {
+    await apiFetch(`/files/${id}`, {method:'DELETE'});
+    toast(`"${name}" deleted.`, 'info');
+    const el = document.querySelector(`[data-id="${id}"]`);
+    if (el) {
+      el.style.transition = 'opacity 0.2s,transform 0.2s';
+      el.style.opacity = '0'; el.style.transform = 'translateX(-10px)';
+      setTimeout(() => { el.remove(); delete _lastFilesMap[id]; _lastFilesList = _lastFilesList.filter(f=>f.id!==id); updateStatsFromMap(); }, 220);
+    }
+  } catch(e) { toast('Delete failed: '+e.message,'error'); }
+}
+
+function updateStatsFromMap() {
+  const files = Object.values(_lastFilesMap);
   document.getElementById('stat-total').textContent   = files.length;
   document.getElementById('stat-public').textContent  = files.filter(f=>f.public).length;
   document.getElementById('stat-private').textContent = files.filter(f=>!f.public).length;
   document.getElementById('files-count').textContent  = `${files.length} item${files.length!==1?'s':''}`;
-  if (!files.length) { listEl.innerHTML=`<div class="empty-state"><div class="empty-icon">◫</div><div class="empty-title">No files yet</div><div class="empty-desc">Upload something to get started</div></div>`; return; }
-  listEl.innerHTML = files.map((f,i) => {
-    const ext=f.ext||'—', canDl=f.public||f.owner===currentUser||isOwner, canDel=f.owner===currentUser||isOwner;
-    const myUp=f.votes?.up?.includes(currentUser), myDn=f.votes?.down?.includes(currentUser);
-    const upCt=f.votes?.up?.length||0, dnCt=f.votes?.down?.length||0, showVotes=f.public||isOwner;
-    const sn=esc(f.name).replace(/&#39;/g,"\\'");
-    return `<div class="file-item${f.pinned?' pinned':''}" style="animation-delay:${i*0.03}s">
-      <div class="file-ext"><div class="file-ext-icon">${getExtIcon(ext)}</div>${esc(ext.toUpperCase().slice(0,4))}</div>
-      <div class="file-info">
-        <div class="file-name">
-          <span class="file-name-link" onclick="openDetailModal('${f.id}')">${esc(f.name)}</span>
-          ${f.pinned?'<span class="pin-badge">📌 Pinned</span>':''}
-        </div>
-        <div class="file-meta">${fmtBytes(f.size)} · ${fmtDate(f.uploaded)} · by <span class="uploader-link" onclick="openProfileModal('${esc(f.owner)}')">${esc(f.owner)}</span></div>
-      </div>
-      <div class="file-actions">
-        <span class="visibility-badge ${f.public?'badge-public':'badge-private'}">${f.public?'Public':'Private'}</span>
-        ${showVotes?`<div class="vote-group"><button class="btn-vote up${myUp?' voted':''}" id="up-${f.id}" onclick="castVote('${f.id}','up')">▲ <span class="vote-count">${upCt}</span></button><button class="btn-vote down${myDn?' voted':''}" id="down-${f.id}" onclick="castVote('${f.id}','down')">▼ <span class="vote-count">${dnCt}</span></button></div>`:''}
-        ${canDl?`<button class="btn-sm dl" onclick="downloadFile('${f.id}','${sn}')">↓ Download</button>`:''}
-        ${isOwner?`<button class="btn-sm tog" onclick="toggleVisibility('${f.id}')">${f.public?'Make Private':'Make Public'}</button>`:''}
-        ${isOwner?`<button class="btn-sm pin${f.pinned?' active':''}" onclick="togglePin('${f.id}')">📌</button>`:''}
-        ${canDel?`<button class="btn-sm del" onclick="deleteFile('${f.id}','${sn}')">✕</button>`:''}
-      </div>
-    </div>`;
-  }).join('');
 }
 
-// ═══════════════════════════════════════════════════════════
-//  DETAIL MODAL
-// ═══════════════════════════════════════════════════════════
+async function castVote(id, dir) {
+  const upEl = document.getElementById(`up-${id}`);
+  const dnEl = document.getElementById(`down-${id}`);
+  const wasUp = upEl && upEl.classList.contains('voted');
+  const wasDn = dnEl && dnEl.classList.contains('voted');
+  const vote  = (dir==='up'&&wasUp)||(dir==='down'&&wasDn) ? null : dir;
+  try {
+    const d = await apiFetch(`/files/${id}/vote`, {method:'POST',headers:{'Content-Type':'application/json'},body:JSON.stringify({vote})});
+    if (upEl) { upEl.querySelector('.vote-count').textContent=d.up; upEl.classList.toggle('voted',vote==='up'); }
+    if (dnEl) { dnEl.querySelector('.vote-count').textContent=d.down; dnEl.classList.toggle('voted',vote==='down'); }
+    const f = _lastFilesMap[id];
+    if (f) { f.votes = { up: Array(d.up).fill(currentUser), down: Array(d.down).fill('') }; }
+  } catch(e) { toast('Vote failed: '+e.message,'error'); }
+}
+
 function openDetailModal(fileId) {
-  const f = _lastFilesList.find(f=>f.id===fileId); if (!f) return;
-  const ext=f.ext||'—';
-  document.getElementById('dm-icon').textContent     = getExtIcon(ext);
-  document.getElementById('dm-extlabel').textContent = ext.toUpperCase().slice(0,4)||'?';
+  _currentDetailFileId = fileId;
+  const f = _lastFilesMap[fileId] || _lastFilesList.find(x => x.id === fileId);
+  if (!f) return;
+  const ext = f.ext || '—';
+  document.getElementById('dm-icon').textContent     = ext.toUpperCase().slice(0,3) || '?';
+  document.getElementById('dm-extlabel').textContent = ext.toUpperCase().slice(0,4) || '?';
   document.getElementById('dm-name').textContent     = f.name;
   document.getElementById('dm-meta').textContent     = `${fmtBytes(f.size)} · ${fmtDate(f.uploaded)} · by ${f.owner}`;
   const descEl = document.getElementById('dm-desc');
   descEl.textContent = f.description || 'No description yet.';
   descEl.classList.toggle('empty', !f.description);
-  const actEl = document.getElementById('dm-actions'); actEl.innerHTML='';
-  const canDl=f.public||f.owner===currentUser||isOwner, showVotes=f.public||isOwner;
-  const myUp=f.votes?.up?.includes(currentUser), myDn=f.votes?.down?.includes(currentUser);
+  document.getElementById('desc-view-wrap').style.display = '';
+  document.getElementById('desc-edit-wrap').style.display = 'none';
+  const descEditBtn = document.getElementById('desc-edit-btn');
+  descEditBtn.style.display = (f.owner === currentUser || isOwner) ? '' : 'none';
+  const actEl = document.getElementById('dm-actions'); actEl.innerHTML = '';
+  const canDl     = f.public || f.owner === currentUser || isOwner;
+  const showVotes = f.public || isOwner;
+  const myUp = (f.votes && f.votes.up   || []).includes(currentUser);
+  const myDn = (f.votes && f.votes.down || []).includes(currentUser);
   if (canDl) {
-    const b=document.createElement('button'); b.className='btn-detail-dl'; b.textContent='↓ Download';
-    b.onclick=()=>{closeDetailModal();downloadFile(f.id,f.name);}; actEl.appendChild(b);
+    const b = document.createElement('button'); b.className = 'btn-detail-dl'; b.textContent = 'Download';
+    b.onclick = () => { closeDetailModal(); downloadFile(f.id, f.name); }; actEl.appendChild(b);
   }
   if (showVotes) {
-    const mkVote=(dir,voted,cnt)=>{
-      const b=document.createElement('button'); b.className=`btn-detail-vote ${dir}${voted?' voted':''}`; b.innerHTML=`${dir==='up'?'▲':'▼'} <span>${cnt}</span>`;
-      b.onclick=async()=>{const w=b.classList.contains('voted');const v=w?null:dir;try{const d=await apiFetch(`/files/${f.id}/vote`,{method:'POST',headers:{'Content-Type':'application/json'},body:JSON.stringify({vote:v})});b.querySelector('span').textContent=dir==='up'?d.up:d.down;b.classList.toggle('voted',!w);const other=actEl.querySelector(`.btn-detail-vote.${dir==='up'?'down':'up'}`);if(other){other.querySelector('span').textContent=dir==='up'?d.down:d.up;other.classList.remove('voted');}const lUp=document.getElementById(`up-${f.id}`),lDn=document.getElementById(`down-${f.id}`);if(lUp){lUp.querySelector('.vote-count').textContent=d.up;lUp.classList.toggle('voted',v==='up');}if(lDn){lDn.querySelector('.vote-count').textContent=d.down;lDn.classList.toggle('voted',v==='down');}}catch(e){toast('Vote failed: '+e.message,'error');}};
+    const mkVote = (dir, voted, cnt) => {
+      const b = document.createElement('button');
+      b.className = `btn-detail-vote ${dir}${voted?' voted':''}`;
+      b.innerHTML = `${dir==='up'?'&#8679;':'&#8681;'} <span>${cnt}</span>`;
+      b.onclick = async () => {
+        const w = b.classList.contains('voted'); const v = w ? null : dir;
+        try {
+          const d = await apiFetch(`/files/${f.id}/vote`,{method:'POST',headers:{'Content-Type':'application/json'},body:JSON.stringify({vote:v})});
+          b.querySelector('span').textContent = dir==='up'?d.up:d.down; b.classList.toggle('voted',!w);
+          const other = actEl.querySelector(`.btn-detail-vote.${dir==='up'?'down':'up'}`);
+          if (other) { other.querySelector('span').textContent=dir==='up'?d.down:d.up; other.classList.remove('voted'); }
+          const lUp=document.getElementById(`up-${f.id}`),lDn=document.getElementById(`down-${f.id}`);
+          if (lUp){lUp.querySelector('.vote-count').textContent=d.up;lUp.classList.toggle('voted',v==='up');}
+          if (lDn){lDn.querySelector('.vote-count').textContent=d.down;lDn.classList.toggle('voted',v==='down');}
+        } catch(e){toast('Vote failed: '+e.message,'error');}
+      };
       return b;
     };
-    actEl.appendChild(mkVote('up',myUp,f.votes?.up?.length||0));
-    actEl.appendChild(mkVote('down',myDn,f.votes?.down?.length||0));
+    actEl.appendChild(mkVote('up',   myUp, (f.votes&&f.votes.up  ||[]).length));
+    actEl.appendChild(mkVote('down', myDn, (f.votes&&f.votes.down||[]).length));
   }
   document.getElementById('detail-modal').classList.add('open');
 }
-function closeDetailModal(){document.getElementById('detail-modal').classList.remove('open');}
-document.getElementById('detail-modal').addEventListener('click',function(e){if(e.target===this)closeDetailModal();});
 
-// ═══════════════════════════════════════════════════════════
-//  DESC PROMPT
-// ═══════════════════════════════════════════════════════════
-function openNextDescPrompt() {
-  if (!_pendingDescFiles.length) { loadFiles(); return; }
-  _currentDescFile = _pendingDescFiles.shift();
-  document.getElementById('desc-input').value='';
-  document.getElementById('desc-modal-sub').textContent='// '+_currentDescFile.name;
-  document.getElementById('desc-modal').classList.add('open');
-  setTimeout(()=>document.getElementById('desc-input').focus(),100);
+function startEditDesc() {
+  const f = _lastFilesMap[_currentDetailFileId] || _lastFilesList.find(x=>x.id===_currentDetailFileId);
+  document.getElementById('desc-edit-textarea').value = (f && f.description) || '';
+  document.getElementById('desc-view-wrap').style.display = 'none';
+  document.getElementById('desc-edit-wrap').style.display = '';
+  document.getElementById('desc-edit-textarea').focus();
 }
+
+function cancelEditDesc() {
+  document.getElementById('desc-view-wrap').style.display = '';
+  document.getElementById('desc-edit-wrap').style.display = 'none';
+}
+
+async function saveDescInline() {
+  if (!_currentDetailFileId) return;
+  const desc = document.getElementById('desc-edit-textarea').value.trim();
+  try {
+    await apiFetch(`/files/${_currentDetailFileId}/description`,{method:'POST',headers:{'Content-Type':'application/json'},body:JSON.stringify({description:desc})});
+    const f = _lastFilesMap[_currentDetailFileId];
+    if (f) f.description = desc;
+    const descEl = document.getElementById('dm-desc');
+    descEl.textContent = desc || 'No description yet.';
+    descEl.classList.toggle('empty', !desc);
+    cancelEditDesc();
+    toast('Description saved', 'success');
+  } catch(e) { toast('Error: '+e.message,'error'); }
+}
+
+function closeDetailModal() {
+  document.getElementById('detail-modal').classList.remove('open');
+  _currentDetailFileId = null; cancelEditDesc();
+}
+document.getElementById('detail-modal').addEventListener('click', function(e){ if(e.target===this) closeDetailModal(); });
+
+function openNextDescPrompt() {
+  if (!_pendingDescFiles.length) { loadFilesQuiet(); return; }
+  _currentDescFile = _pendingDescFiles.shift();
+  _currentDetailFileId = _currentDescFile.id;
+  const f = { id:_currentDescFile.id, name:_currentDescFile.name, ext:'', size:0, owner:currentUser, public:false, votes:{up:[],down:[]}, uploaded:Date.now(), description:'' };
+  _lastFilesMap[f.id] = f;
+  document.getElementById('dm-icon').textContent     = (_currentDescFile.name.split('.').pop()||'?').toUpperCase().slice(0,3);
+  document.getElementById('dm-extlabel').textContent = (_currentDescFile.name.split('.').pop()||'?').toUpperCase().slice(0,4);
+  document.getElementById('dm-name').textContent     = _currentDescFile.name;
+  document.getElementById('dm-meta').textContent     = 'Just uploaded';
+  const descEl = document.getElementById('dm-desc');
+  descEl.textContent = 'No description yet.'; descEl.classList.add('empty');
+  document.getElementById('desc-view-wrap').style.display = 'none';
+  document.getElementById('desc-edit-wrap').style.display = '';
+  document.getElementById('desc-edit-textarea').value = '';
+  document.getElementById('dm-actions').innerHTML = '';
+  document.getElementById('detail-modal').classList.add('open');
+  setTimeout(() => document.getElementById('desc-edit-textarea').focus(), 150);
+}
+
 async function saveDesc() {
-  const desc = document.getElementById('desc-input').value.trim();
-  document.getElementById('desc-modal').classList.remove('open');
+  const desc = document.getElementById('desc-edit-textarea').value.trim();
+  document.getElementById('detail-modal').classList.remove('open');
   if (_currentDescFile && desc) {
     try { await apiFetch(`/files/${_currentDescFile.id}/description`,{method:'POST',headers:{'Content-Type':'application/json'},body:JSON.stringify({description:desc})}); }
     catch(e) { toast('Could not save description: '+e.message,'error'); }
   }
+  _currentDescFile = null; _currentDetailFileId = null;
   openNextDescPrompt();
 }
-function skipDesc(){ document.getElementById('desc-modal').classList.remove('open'); openNextDescPrompt(); }
+function skipDesc() {
+  document.getElementById('detail-modal').classList.remove('open');
+  _currentDescFile = null; _currentDetailFileId = null;
+  openNextDescPrompt();
+}
 
-// ═══════════════════════════════════════════════════════════
-//  REQUEST MODAL (with real-time upload progress)
-// ═══════════════════════════════════════════════════════════
 let _reqFileUploaded = false;
 let _reqFileId       = null;
 let _reqFileName     = null;
@@ -1148,47 +1381,43 @@ function openRequestModal() {
   document.getElementById('req-upload-pct').style.display='none';
   document.getElementById('req-upload-bar').style.width='0%';
   const btn=document.getElementById('req-submit-btn');
-  btn.disabled=true; btn.textContent='Upload first…';
+  btn.disabled=true; btn.textContent='Upload first';
   document.getElementById('request-modal').classList.add('open');
 }
-function closeRequestModal(){document.getElementById('request-modal').classList.remove('open');}
-document.getElementById('request-modal').addEventListener('click',function(e){if(e.target===this)closeRequestModal();});
+function closeRequestModal() { document.getElementById('request-modal').classList.remove('open'); }
+document.getElementById('request-modal').addEventListener('click', function(e){ if(e.target===this) closeRequestModal(); });
 
 document.getElementById('req-file-input').addEventListener('change', async function() {
   const file=this.files[0]; if (!file) return;
-  document.getElementById('req-file-label').textContent='📎 '+file.name;
+  document.getElementById('req-file-label').textContent = file.name;
   document.getElementById('req-file-pick').classList.add('has-file');
   const prog=document.getElementById('req-upload-progress');
   const bar =document.getElementById('req-upload-bar');
   const pct =document.getElementById('req-upload-pct');
   prog.style.display='block'; pct.style.display='block'; bar.style.width='0%'; pct.textContent='0%';
   const btn=document.getElementById('req-submit-btn'); btn.disabled=true; btn.textContent='Uploading…';
-  // Disable fields during upload
   document.getElementById('req-reason').disabled=true;
   try {
     const form=new FormData(); form.append('file',file); form.append('reason','__pending__');
-    const data=await xhrUpload(BACKEND_URL+'/inbox/request',form,p=>{
+    const data=await xhrUpload(BACKEND_URL+'/inbox/request',form, p=>{
       const v=Math.round(p*100); bar.style.width=v+'%'; pct.textContent=v+'%';
     });
     bar.style.width='100%'; pct.textContent='100%';
     setTimeout(()=>{prog.style.display='none';pct.style.display='none';},600);
     _reqFileId=data.fileId; _reqFileName=data.filename; _reqFileUploaded=true;
-    btn.disabled=false; btn.textContent='Send Request →';
+    btn.disabled=false; btn.textContent='Send Request';
     toast('File uploaded! Add a reason and send.','info');
   } catch(e) {
     prog.style.display='none'; pct.style.display='none'; bar.style.width='0%';
-    toast('Upload failed: '+e.message,'error'); btn.textContent='Upload first…';
+    toast('Upload failed: '+e.message,'error'); btn.textContent='Upload first';
   } finally { document.getElementById('req-reason').disabled=false; }
 });
 
 async function submitRequest() {
   const reason=document.getElementById('req-reason').value.trim();
   if (!reason) { toast('Please write a reason.','error'); return; }
-  // If file was pre-uploaded, update the inbox entry reason via a separate call,
-  // otherwise send a reason-only request
   try {
     if (_reqFileId) {
-      // Update the pending inbox entry with the real reason
       await apiFetch('/inbox/request/finalize',{method:'POST',headers:{'Content-Type':'application/json'},body:JSON.stringify({fileId:_reqFileId,reason})});
     } else {
       const form=new FormData(); form.append('reason',reason);
@@ -1196,112 +1425,113 @@ async function submitRequest() {
       if (!res.ok) { const b=await res.json().catch(()=>({})); throw new Error(b.error||`HTTP ${res.status}`); }
     }
     closeRequestModal();
-    toast('Request sent to owner ✓','success');
+    toast('Request sent to owner','success');
   } catch(e) { toast('Failed: '+e.message,'error'); }
 }
 
-// ═══════════════════════════════════════════════════════════
-//  PROFILE MODAL
-// ═══════════════════════════════════════════════════════════
 async function openProfileModal(username) {
   try {
-    const data = await apiFetch(`/profile/${username}`);
-    const p=data.profile, files=data.files||[];
+    const data  = await apiFetch(`/profile/${username}`);
+    const p     = data.profile;
+    const files = data.files || [];
+    _profileCache[username] = p;
     renderAvatar(document.getElementById('pm-avatar'), p);
-    document.getElementById('pm-name').textContent     = p.nickname||p.username;
-    document.getElementById('pm-username').textContent = '@'+p.username;
-    document.getElementById('pm-role').textContent     = p.role;
-    document.getElementById('pm-bio').textContent      = p.bio||'No bio yet.';
+    document.getElementById('pm-name').textContent     = p.nickname || p.username;
+    document.getElementById('pm-username').textContent = '@' + p.username;
+    document.getElementById('pm-role').textContent     = p.role + (p.banned ? ' · BANNED' : '');
+    document.getElementById('pm-bio').textContent      = p.bio || 'No bio yet.';
     document.getElementById('pm-stat').textContent     = `Joined ${fmtDateTime(p.created)} · ${files.length} public file${files.length!==1?'s':''}`;
-    if (p.banned) document.getElementById('pm-role').textContent += ' · BANNED';
-
+    const warnInfo = document.getElementById('pm-warn-info');
+    if (isOwner && p.warnings > 0) {
+      warnInfo.style.display = '';
+      warnInfo.innerHTML = `<div style="padding:9px 14px;background:var(--yellow-dim);border:1px solid rgba(251,191,36,0.3);border-radius:var(--radius-sm);font-size:12px;font-family:'DM Mono',monospace;color:var(--yellow)">${p.warnings} warning${p.warnings!==1?'s':''} issued</div>`;
+    } else { warnInfo.style.display='none'; }
     const acts=document.getElementById('pm-actions'); acts.innerHTML='';
     if (username !== currentUser) {
-      const msgBtn=document.createElement('button'); msgBtn.className='btn-profile-msg'; msgBtn.textContent='💬 Message';
+      const msgBtn=document.createElement('button'); msgBtn.className='btn-profile-msg'; msgBtn.textContent='Message';
       msgBtn.onclick=()=>{ closeProfileModal(); openChatbox(username,p); }; acts.appendChild(msgBtn);
     }
     if (isOwner && username !== currentUser) {
-      const banBtn=document.createElement('button'); banBtn.className='btn-profile-ban'; banBtn.textContent=p.banned?'Unban User':'Ban User';
-      banBtn.onclick=async()=>{try{await apiFetch(`/users/${username}/ban`,{method:'POST'});toast(p.banned?'User unbanned.':'User banned.','info');closeProfileModal();}catch(e){toast('Error: '+e.message,'error');}};
+      const banBtn=document.createElement('button'); banBtn.className='btn-profile-ban'; banBtn.textContent=p.banned?'Unban':'Ban User';
+      banBtn.onclick=async()=>{ try{await apiFetch(`/users/${username}/ban`,{method:'POST'});toast(p.banned?'User unbanned.':'User banned.','info');closeProfileModal();loadUsers();}catch(e){toast('Error: '+e.message,'error');} };
       acts.appendChild(banBtn);
-      const warnBtn=document.createElement('button'); warnBtn.className='btn-profile-warn'; warnBtn.textContent='⚠️ Warn';
+      const warnBtn=document.createElement('button'); warnBtn.className='btn-profile-warn'; warnBtn.textContent='Warn';
       warnBtn.onclick=()=>{ openWarnModal(username); }; acts.appendChild(warnBtn);
     }
-
     const pf=document.getElementById('pm-files');
     if (files.length) {
-      pf.innerHTML='<div style="font-size:11px;font-weight:700;letter-spacing:0.1em;text-transform:uppercase;color:var(--muted);font-family:\'DM Mono\',monospace;margin-bottom:10px">Public Files</div>'+files.slice(0,6).map(f=>`<div style="display:flex;align-items:center;gap:10px;padding:8px 0;border-bottom:1px solid var(--border)"><span>${getExtIcon(f.ext)}</span><span style="flex:1;font-size:13px;overflow:hidden;text-overflow:ellipsis;white-space:nowrap;cursor:pointer;color:var(--accent)" onclick="closeProfileModal();openDetailModal('${f.id}')">${esc(f.name)}</span><span style="font-size:11px;color:var(--muted);font-family:\'DM Mono\',monospace">${fmtBytes(f.size)}</span></div>`).join('');
-    } else { pf.innerHTML='<div style="font-size:12px;color:var(--muted);font-family:\'DM Mono\',monospace;margin-top:12px">No public files yet.</div>'; }
-
+      pf.innerHTML='<div style="font-size:10px;font-weight:700;letter-spacing:0.1em;text-transform:uppercase;color:var(--muted);font-family:\'DM Mono\',monospace;margin-bottom:9px">Public Files</div>'+
+        files.slice(0,6).map(f=>`<div style="display:flex;align-items:center;gap:9px;padding:7px 0;border-bottom:1px solid var(--border)"><span style="font-size:11px;font-family:'DM Mono',monospace;color:var(--accent);flex-shrink:0">${esc((f.ext||'?').toUpperCase().slice(0,4))}</span><span style="flex:1;font-size:12px;overflow:hidden;text-overflow:ellipsis;white-space:nowrap;cursor:pointer;color:var(--text)" onclick="closeProfileModal();openDetailModal('${f.id}')">${esc(f.name)}</span><span style="font-size:11px;color:var(--muted);font-family:'DM Mono',monospace">${fmtBytes(f.size)}</span></div>`).join('');
+    } else { pf.innerHTML='<div style="font-size:12px;color:var(--muted);font-family:\'DM Mono\',monospace;margin-top:11px">No public files yet.</div>'; }
     document.getElementById('profile-modal').classList.add('open');
   } catch(e) { toast('Could not load profile: '+e.message,'error'); }
 }
-function closeProfileModal(){document.getElementById('profile-modal').classList.remove('open');}
-document.getElementById('profile-modal').addEventListener('click',function(e){if(e.target===this)closeProfileModal();});
+function closeProfileModal() { document.getElementById('profile-modal').classList.remove('open'); }
+document.getElementById('profile-modal').addEventListener('click', function(e){ if(e.target===this) closeProfileModal(); });
 
-// ═══════════════════════════════════════════════════════════
-//  WARN MODAL
-// ═══════════════════════════════════════════════════════════
 function openWarnModal(username) {
   closeProfileModal();
-  document.getElementById('warn-modal-sub').textContent='// warning to @'+username;
-  document.getElementById('warn-input').value='';
-  document.getElementById('warn-submit-btn').onclick=async()=>{
-    const msg=document.getElementById('warn-input').value.trim();
-    try { await apiFetch(`/users/${username}/warn`,{method:'POST',headers:{'Content-Type':'application/json'},body:JSON.stringify({message:msg})}); toast('Warning sent.','info'); document.getElementById('warn-modal').classList.remove('open'); }
-    catch(e){ toast('Error: '+e.message,'error'); }
+  document.getElementById('warn-modal-sub').textContent = '// warning to @' + username;
+  document.getElementById('warn-input').value = '';
+  document.getElementById('warn-submit-btn').onclick = async () => {
+    const msg = document.getElementById('warn-input').value.trim();
+    if (!msg) { toast('Enter a message.','error'); return; }
+    try {
+      await apiFetch(`/users/${username}/warn`,{method:'POST',headers:{'Content-Type':'application/json'},body:JSON.stringify({message:msg})});
+      toast('Warning sent.','info');
+      document.getElementById('warn-modal').classList.remove('open');
+      loadUsers();
+    } catch(e) { toast('Error: '+e.message,'error'); }
   };
   document.getElementById('warn-modal').classList.add('open');
 }
 
-// ═══════════════════════════════════════════════════════════
-//  DM SYSTEM
-// ═══════════════════════════════════════════════════════════
-function getThreadId(a,b){return[a,b].sort().join('::')}
+function getThreadId(a,b) { return [a,b].sort().join('::'); }
 
 async function openChatbox(withUser, profile) {
   _chatWithUser = withUser;
   _chatThreadId = getThreadId(currentUser, withUser);
-  renderAvatar(document.getElementById('chatbox-avatar'), profile||{username:withUser});
-  document.getElementById('chatbox-title').textContent = profile?.nickname||withUser;
-  document.getElementById('chatbox-input').value='';
+  renderAvatar(document.getElementById('chatbox-avatar'), profile || {username:withUser});
+  document.getElementById('chatbox-title').textContent = (profile && profile.nickname) || withUser;
+  document.getElementById('chatbox-input').value = '';
   document.getElementById('dm-chatbox').classList.add('open');
   await loadChatMessages();
   startChatPoll();
 }
-function closeChatbox(){
+function closeChatbox() {
   document.getElementById('dm-chatbox').classList.remove('open');
-  _chatWithUser=null; _chatThreadId=null;
-  if(_chatPollTimer){clearInterval(_chatPollTimer);_chatPollTimer=null;}
+  _chatWithUser = null; _chatThreadId = null;
+  if (_chatPollTimer) { clearInterval(_chatPollTimer); _chatPollTimer = null; }
 }
 
 async function loadChatMessages() {
   if (!_chatThreadId) return;
   try {
-    const data=await apiFetch(`/dms/${_chatThreadId}`);
+    const data = await apiFetch(`/dms/${_chatThreadId}`);
     renderChatMessages(data.thread);
-  } catch(e) {
-    // Thread may not exist yet — that's fine
-  }
+  } catch {}
 }
 
 function renderChatMessages(thread) {
-  const box=document.getElementById('chatbox-messages'); box.innerHTML='';
-  if (!thread?.messages?.length) { box.innerHTML='<div style="text-align:center;color:var(--muted);font-size:12px;font-family:\'DM Mono\',monospace;padding:20px">No messages yet. Say hi!</div>'; return; }
-  // Show accept banner if unaccepted and we are the recipient
+  const box = document.getElementById('chatbox-messages'); box.innerHTML = '';
+  if (!thread || !thread.messages || !thread.messages.length) {
+    box.innerHTML='<div style="text-align:center;color:var(--muted);font-size:12px;font-family:\'DM Mono\',monospace;padding:18px">No messages yet</div>'; return;
+  }
   if (!thread.accepted && thread.initiator !== currentUser) {
-    const banner=document.createElement('div'); banner.style.cssText='padding:10px;text-align:center';
-    banner.innerHTML=`<div style="font-size:12px;color:var(--muted);font-family:'DM Mono',monospace;margin-bottom:8px">@${thread.initiator} wants to message you</div><div style="display:flex;gap:8px;justify-content:center"><button class="btn-approve" onclick="acceptDM('${thread.id}')">Accept</button><button class="btn-decline" onclick="declineDM('${thread.id}')">Decline</button></div>`;
+    const banner = document.createElement('div'); banner.style.cssText='padding:10px;text-align:center';
+    banner.innerHTML=`<div style="font-size:12px;color:var(--muted);font-family:'DM Mono',monospace;margin-bottom:7px">@${thread.initiator} wants to message you</div><div style="display:flex;gap:7px;justify-content:center"><button class="btn-approve" onclick="acceptDM('${thread.id}')">Accept</button><button class="btn-decline" onclick="declineDM('${thread.id}')">Decline</button></div>`;
     box.appendChild(banner);
   }
-  thread.messages.forEach(m=>{
-    const wrap=document.createElement('div'); wrap.style.display='flex'; wrap.style.flexDirection='column';
-    const msg=document.createElement('div'); msg.className=`chat-msg ${m.from==='__system__'?'system':m.from===currentUser?'mine':'theirs'}`;
-    msg.textContent=m.text; wrap.appendChild(msg);
-    const ts=document.createElement('div'); ts.className='chat-ts'; ts.textContent=fmtDateTime(m.ts);
+  thread.messages.forEach(m => {
+    const wrap = document.createElement('div'); wrap.style.display='flex'; wrap.style.flexDirection='column';
+    const msg = document.createElement('div');
+    msg.className = `chat-msg ${m.from==='__system__'?'system':m.from===currentUser?'mine':'theirs'}`;
+    msg.textContent = m.text; wrap.appendChild(msg);
+    const ts = document.createElement('div');
+    ts.className = `chat-ts${m.from===currentUser?' mine-ts':''}`; ts.textContent = fmtDateTime(m.ts);
     wrap.appendChild(ts); box.appendChild(wrap);
   });
-  box.scrollTop=box.scrollHeight;
+  box.scrollTop = box.scrollHeight;
 }
 
 async function acceptDM(threadId) {
@@ -1314,166 +1544,197 @@ async function declineDM(threadId) {
 }
 
 async function sendChatMsg() {
-  const inp=document.getElementById('chatbox-input');
-  const text=inp.value.trim(); if (!text) return;
-  inp.value='';
+  const inp = document.getElementById('chatbox-input');
+  const text = inp.value.trim(); if (!text) return;
+  inp.value = '';
   try { await apiFetch(`/dms/${_chatWithUser}`,{method:'POST',headers:{'Content-Type':'application/json'},body:JSON.stringify({text})}); loadChatMessages(); }
   catch(e) { toast('Message failed: '+e.message,'error'); }
 }
 
 function startChatPoll() {
   if (_chatPollTimer) clearInterval(_chatPollTimer);
-  _chatPollTimer = setInterval(()=>{ if(_chatThreadId) loadChatMessages(); }, 4000);
+  _chatPollTimer = setInterval(() => { if (_chatThreadId) loadChatMessages(); }, 4000);
 }
 
 async function checkDMDot() {
-  if (!BACKEND_URL||!currentUser) return;
+  if (!BACKEND_URL || !currentUser) return;
   try {
-    const data=await apiFetch('/dms');
-    const unread=data.threads.filter(t=>t.unread>0).length;
-    ['dm-dot','sb-dm-dot'].forEach(id=>{const el=document.getElementById(id);if(el)el.style.display=unread?'':'none';});
+    const data   = await apiFetch('/dms');
+    const unread = data.threads.filter(t => t.unread > 0).length;
+    ['dm-dot','sb-dm-dot'].forEach(id => { const el=document.getElementById(id); if(el) el.style.display=unread?'':'none'; });
   } catch {}
 }
 
 async function loadDMThreads() {
   try {
-    const data=await apiFetch('/dms');
-    const listEl=document.getElementById('dm-threads-list');
-    if (!data.threads.length) { listEl.innerHTML='<div class="empty-state"><div class="empty-icon">💬</div><div class="empty-title">No messages yet</div><div class="empty-desc">Click a username on any file to start a conversation</div></div>'; return; }
-    listEl.innerHTML=data.threads.map(t=>`
-      <div class="dm-item${t.unread?' unread':''}" onclick="openChatbox('${esc(t.with)}',null)">
-        <div class="avatar sm" style="background:var(--accent)">${t.with[0].toUpperCase()}</div>
+    const data   = await apiFetch('/dms');
+    const listEl = document.getElementById('dm-threads-list');
+    if (!data.threads.length) {
+      listEl.innerHTML='<div class="empty-state"><div class="empty-icon">&#9675;</div><div class="empty-title">No messages yet</div><div class="empty-desc">Click a username on any file to start a conversation</div></div>'; return;
+    }
+    listEl.innerHTML = '';
+    data.threads.forEach(t => {
+      const item = document.createElement('div');
+      item.className = `dm-item${t.unread ? ' unread' : ''}`;
+      item.onclick = () => openChatbox(t.with, _profileCache[t.with] || null);
+      const avId = 'dmav-' + t.with.replace(/[^a-z0-9]/g,'');
+      item.innerHTML = `
+        <div class="avatar sm" id="${avId}"></div>
         <div class="dm-item-info">
           <div class="dm-item-name">@${esc(t.with)}</div>
           <div class="dm-item-preview">${t.lastMessage ? esc(t.lastMessage.text) : 'No messages yet'}</div>
-          ${!t.accepted&&t.initiator!==currentUser?`<div class="dm-accept-row"><button class="btn-approve" onclick="event.stopPropagation();acceptDM('${t.id}')">Accept</button><button class="btn-decline" onclick="event.stopPropagation();declineDM('${t.id}')">Decline</button></div>`:''}
-        </div>
-      </div>`).join('');
+          ${!t.accepted && t.initiator !== currentUser ? `<div class="dm-accept-row"><button class="btn-approve" onclick="event.stopPropagation();acceptDM('${t.id}')">Accept</button><button class="btn-decline" onclick="event.stopPropagation();declineDM('${t.id}')">Decline</button></div>` : ''}
+        </div>`;
+      listEl.appendChild(item);
+      const avEl = item.querySelector(`#${avId}`);
+      if (_profileCache[t.with]) {
+        renderAvatar(avEl, _profileCache[t.with]);
+      } else {
+        avEl.textContent = t.with[0].toUpperCase();
+        avEl.style.background = '#7c6fff';
+        fetchProfileCached(t.with).then(p => { if (p) renderAvatar(avEl, p); });
+      }
+    });
   } catch(e) { toast('Could not load messages: '+e.message,'error'); }
 }
 
-// ═══════════════════════════════════════════════════════════
-//  INBOX (owner file requests)
-// ═══════════════════════════════════════════════════════════
 function switchPanelTab(tab) {
   document.getElementById('panel-settings-tab').style.display = tab==='settings' ? '' : 'none';
   document.getElementById('panel-inbox-tab').style.display    = tab==='inbox'    ? '' : 'none';
   document.getElementById('ptab-settings').classList.toggle('active', tab==='settings');
   document.getElementById('ptab-inbox').classList.toggle('active',    tab==='inbox');
-  if (tab==='inbox') loadInbox();
+  if (tab === 'inbox') loadInbox();
 }
 
 async function loadInboxCount() {
-  if (!isOwner||!BACKEND_URL) return;
-  try { const d=await apiFetch('/inbox'); const u=d.inbox.filter(i=>!i.read).length; ['inbox-dot','sb-inbox-dot','panel-inbox-dot'].forEach(id=>{const el=document.getElementById(id);if(el)el.style.display=u?'':'none';}); } catch {}
+  if (!isOwner || !BACKEND_URL) return;
+  try {
+    const d = await apiFetch('/inbox');
+    const u = d.inbox.filter(i => !i.read).length;
+    ['inbox-dot','sb-inbox-dot','panel-inbox-dot'].forEach(id => { const el=document.getElementById(id); if(el) el.style.display=u?'':'none'; });
+  } catch {}
 }
 
 function renderInbox(items) {
-  const list=document.getElementById('inbox-list'), bulk=document.getElementById('inbox-bulk');
-  if (!items.length) { list.innerHTML='<div class="empty-state"><div class="empty-icon">◫</div><div class="empty-title">No requests</div></div>'; if(bulk)bulk.style.display='none'; return; }
-  if(bulk)bulk.style.display='';
-  list.innerHTML=items.map(item=>`
+  const list = document.getElementById('inbox-list');
+  const bulk = document.getElementById('inbox-bulk');
+  if (!items.length) {
+    list.innerHTML='<div class="empty-state"><div class="empty-icon">&#9633;</div><div class="empty-title">No requests</div></div>';
+    if (bulk) bulk.style.display='none'; return;
+  }
+  if (bulk) bulk.style.display='';
+  list.innerHTML = items.map(item => `
     <div class="inbox-item${item.read?'':' unread'}">
       <div class="inbox-top"><span class="inbox-from">@${esc(item.from)}</span><span class="inbox-date">${fmtDateTime(item.date)}</span></div>
-      ${item.filename?`<div class="inbox-filename">📎 ${esc(item.filename)}</div>`:''}
+      ${item.filename ? `<div class="inbox-filename">${esc(item.filename)}</div>` : ''}
       <div class="inbox-reason">${esc(item.reason)}</div>
       <div class="inbox-actions">
-        ${item.fileId?`<button class="btn-approve" onclick="approveRequest('${item.id}')">✓ Accept</button><button class="btn-decline" onclick="declineRequest('${item.id}')">✕ Decline</button>`:(!item.read?`<button class="btn-mark-read" onclick="markRead('${item.id}')">Mark read</button>`:'')}
-        <button class="btn-inbox-del" onclick="deleteInbox('${item.id}')">✕ Delete</button>
+        ${item.fileId ? `<button class="btn-approve" onclick="approveRequest('${item.id}')">Accept</button><button class="btn-decline" onclick="declineRequest('${item.id}')">Decline</button>` : (!item.read ? `<button class="btn-mark-read" onclick="markRead('${item.id}')">Mark read</button>` : '')}
+        <button class="btn-inbox-del" onclick="deleteInbox('${item.id}')">Delete</button>
       </div>
     </div>`).join('');
 }
 
 async function loadInbox() {
   if (!isOwner) return;
-  try { const d=await apiFetch('/inbox'); const u=d.inbox.filter(i=>!i.read).length; ['inbox-dot','sb-inbox-dot','panel-inbox-dot'].forEach(id=>{const el=document.getElementById(id);if(el)el.style.display=u?'':'none';}); renderInbox(d.inbox); }
-  catch(e) { toast('Could not load inbox: '+e.message,'error'); }
+  try {
+    const d = await apiFetch('/inbox');
+    const u = d.inbox.filter(i => !i.read).length;
+    ['inbox-dot','sb-inbox-dot','panel-inbox-dot'].forEach(id => { const el=document.getElementById(id); if(el) el.style.display=u?'':'none'; });
+    renderInbox(d.inbox);
+  } catch(e) { toast('Could not load inbox: '+e.message,'error'); }
 }
-async function approveRequest(id){try{await apiFetch(`/inbox/${id}/approve`,{method:'POST'});toast('Accepted ✓','success');loadInbox();loadFiles();}catch(e){toast('Error: '+e.message,'error');}}
-async function declineRequest(id){try{await apiFetch(`/inbox/${id}/decline`,{method:'POST'});toast('Declined.','info');loadInbox();loadFiles();}catch(e){toast('Error: '+e.message,'error');}}
-async function markRead(id){try{await apiFetch(`/inbox/${id}/read`,{method:'POST'});loadInbox();}catch(e){toast('Error: '+e.message,'error');}}
-async function deleteInbox(id){try{await apiFetch(`/inbox/${id}`,{method:'DELETE'});loadInbox();}catch(e){toast('Error: '+e.message,'error');}}
-async function markAllRead(){try{await apiFetch('/inbox/read-all',{method:'POST'});loadInbox();}catch(e){toast('Error: '+e.message,'error');}}
-async function deleteAllInbox(){try{await apiFetch('/inbox/delete-all',{method:'DELETE'});loadInbox();}catch(e){toast('Error: '+e.message,'error');}}
+async function approveRequest(id) { try{await apiFetch(`/inbox/${id}/approve`,{method:'POST'});toast('Accepted','success');loadInbox();loadFilesQuiet();}catch(e){toast('Error: '+e.message,'error');} }
+async function declineRequest(id) { try{await apiFetch(`/inbox/${id}/decline`,{method:'POST'});toast('Declined.','info');loadInbox();loadFilesQuiet();}catch(e){toast('Error: '+e.message,'error');} }
+async function markRead(id)       { try{await apiFetch(`/inbox/${id}/read`,{method:'POST'});loadInbox();}catch(e){toast('Error: '+e.message,'error');} }
+async function deleteInbox(id)    { try{await apiFetch(`/inbox/${id}`,{method:'DELETE'});loadInbox();}catch(e){toast('Error: '+e.message,'error');} }
+async function markAllRead()      { try{await apiFetch('/inbox/read-all',{method:'POST'});loadInbox();}catch(e){toast('Error: '+e.message,'error');} }
+async function deleteAllInbox()   { try{await apiFetch('/inbox/delete-all',{method:'DELETE'});loadInbox();}catch(e){toast('Error: '+e.message,'error');} }
 
-// ═══════════════════════════════════════════════════════════
-//  USERS PAGE (owner)
-// ═══════════════════════════════════════════════════════════
 async function loadUsers() {
   try {
-    const data=await apiFetch('/users');
-    const listEl=document.getElementById('users-list');
-    if (!data.users.length) { listEl.innerHTML='<div class="empty-state"><div class="empty-icon">👥</div><div class="empty-title">No users</div></div>'; return; }
-    listEl.innerHTML=data.users.map(u=>`
-      <div class="user-row" onclick="openProfileModal('${esc(u.username)}')">
-        <div class="avatar" style="background:${u.avatarColor||'#7c6fff'}">${(u.nickname||u.username)[0].toUpperCase()}</div>
+    const data   = await apiFetch('/users');
+    const listEl = document.getElementById('users-list');
+    if (!data.users.length) { listEl.innerHTML='<div class="empty-state"><div class="empty-icon">&#9675;</div><div class="empty-title">No users</div></div>'; return; }
+    listEl.innerHTML = '';
+    data.users.forEach(u => {
+      _profileCache[u.username] = u;
+      const row = document.createElement('div');
+      row.className = 'user-row';
+      row.onclick = () => openProfileModal(u.username);
+      const avId = 'urow-av-' + u.username;
+      row.innerHTML = `
+        <div class="avatar" id="${avId}"></div>
         <div class="user-row-info">
           <div class="user-row-name">${esc(u.nickname||u.username)} <span style="font-size:11px;color:var(--muted);font-family:'DM Mono',monospace">@${esc(u.username)}</span></div>
           <div class="user-row-meta">Joined ${fmtDate(u.created)} · ${u.role}</div>
         </div>
-        ${u.banned?'<span class="ban-badge">Banned</span>':''}
-        ${u.warnings?`<span class="warn-badge">⚠️ ${u.warnings} warn${u.warnings!==1?'s':''}</span>`:''}
-      </div>`).join('');
+        ${u.banned ? '<span class="ban-badge">Banned</span>' : ''}
+        ${u.warnings ? `<span class="warn-badge">${u.warnings} warn${u.warnings!==1?'s':''}</span>` : ''}`;
+      listEl.appendChild(row);
+      renderAvatar(row.querySelector(`#${avId}`), u);
+    });
   } catch(e) { toast('Could not load users: '+e.message,'error'); }
 }
 
-// ═══════════════════════════════════════════════════════════
-//  POLLING
-// ═══════════════════════════════════════════════════════════
-let _pollFilesTimer=null, _pollDMTimer=null, _lastFilesJson='', _lastInboxJson='';
+let _pollFilesTimer = null;
+let _pollDMTimer    = null;
 
 function startPolling() {
   stopPolling();
-  _pollFilesTimer=setInterval(async()=>{
-    if(!BACKEND_URL||!currentUser) return;
-    if(!document.getElementById('page-files').classList.contains('active')) return;
-    try{const d=await apiFetch('/files');const j=JSON.stringify(d.files);if(j!==_lastFilesJson){_lastFilesJson=j;renderFiles(d.files||[]);}}catch{}
-  },8000);
-  _pollDMTimer=setInterval(()=>{ checkDMDot(); if(isOwner)loadInboxCount(); },15000);
+  _pollFilesTimer = setInterval(async () => {
+    if (!BACKEND_URL || !currentUser) return;
+    if (!document.getElementById('page-files').classList.contains('active')) return;
+    await loadFilesQuiet();
+  }, 6000);
+  _pollDMTimer = setInterval(async () => {
+    checkDMDot();
+    if (isOwner) loadInboxCount();
+    if (document.getElementById('page-messages').classList.contains('active')) loadDMThreads();
+    if (isOwner && document.getElementById('page-users').classList.contains('active')) loadUsers();
+  }, 8000);
 }
-function stopPolling(){clearInterval(_pollFilesTimer);clearInterval(_pollDMTimer);_pollFilesTimer=null;_pollDMTimer=null;_lastFilesJson='';}
-
-// ═══════════════════════════════════════════════════════════
-//  DRAG/DROP
-// ═══════════════════════════════════════════════════════════
-function onDragOver(e){e.preventDefault();document.getElementById('upload-zone').classList.add('dragover');}
-function onDragLeave(){document.getElementById('upload-zone').classList.remove('dragover');}
-function onDrop(e){e.preventDefault();document.getElementById('upload-zone').classList.remove('dragover');handleFileInput(e.dataTransfer.files);}
-
-// ═══════════════════════════════════════════════════════════
-//  TOAST
-// ═══════════════════════════════════════════════════════════
-function toast(msg,type='info'){
-  const c=document.getElementById('toast-container');
-  const el=document.createElement('div'); const icon=type==='success'?'✓':type==='error'?'✕':'ℹ';
-  el.className=`toast ${type}`; el.innerHTML=`<span>${icon}</span> ${esc(msg)}`;
-  c.appendChild(el); setTimeout(()=>{el.style.animation='toastOut 0.3s ease forwards';setTimeout(()=>el.remove(),300);},3200);
+function stopPolling() {
+  clearInterval(_pollFilesTimer); clearInterval(_pollDMTimer);
+  _pollFilesTimer = null; _pollDMTimer = null;
 }
 
-// ═══════════════════════════════════════════════════════════
-//  KEYBOARD
-// ═══════════════════════════════════════════════════════════
-document.addEventListener('keydown',e=>{
-  if(e.key==='Escape'){closeRequestModal();closeDetailModal();closeProfileModal();document.getElementById('desc-modal').classList.remove('open');document.getElementById('warn-modal').classList.remove('open');}
-  if(e.key==='Enter'&&document.getElementById('auth-screen').classList.contains('active')){
-    if(document.getElementById('auth-server-step').style.display!=='none'){authConnect();return;}
-    if(activeTab==='login')doLogin(); else doSignup();
+function onDragOver(e)  { e.preventDefault(); document.getElementById('upload-zone').classList.add('dragover'); }
+function onDragLeave()  { document.getElementById('upload-zone').classList.remove('dragover'); }
+function onDrop(e)      { e.preventDefault(); document.getElementById('upload-zone').classList.remove('dragover'); handleFileInput(e.dataTransfer.files); }
+
+function toast(msg, type='info') {
+  const c   = document.getElementById('toast-container');
+  const el  = document.createElement('div');
+  const icon = type==='success'?'v':type==='error'?'x':'·';
+  el.className = `toast ${type}`;
+  el.innerHTML = `<span>${icon}</span> ${esc(msg)}`;
+  c.appendChild(el);
+  setTimeout(() => { el.style.animation='toastOut 0.3s ease forwards'; setTimeout(()=>el.remove(),300); }, 3000);
+}
+
+document.addEventListener('keydown', e => {
+  if (e.key === 'Escape') {
+    closeRequestModal(); closeDetailModal(); closeProfileModal();
+    document.getElementById('warn-modal').classList.remove('open');
+    closeMobileSidebar();
+  }
+  if (e.key === 'Enter' && document.getElementById('auth-screen').classList.contains('active')) {
+    if (document.getElementById('auth-server-step').style.display !== 'none') { authConnect(); return; }
+    if (activeTab === 'login') doLogin(); else doSignup();
   }
 });
 
-// ═══════════════════════════════════════════════════════════
-//  INIT
-// ═══════════════════════════════════════════════════════════
-(async function init(){
+(async function init() {
   setLayout(currentLayout);
-  showAuthStep(BACKEND_URL?'login':'server');
-  const token=getToken();
-  if(!token||!BACKEND_URL) return;
-  try{
-    const data=await apiFetch('/me');
+  showAuthStep(BACKEND_URL ? 'login' : 'server');
+  const token = getToken();
+  if (!token || !BACKEND_URL) return;
+  try {
+    const data = await apiFetch('/me');
     applyBackendUrl(data.backendUrl);
-    enterApp(data.username,data.role,data.profile);
-  } catch { clearToken(); showAuthStep(BACKEND_URL?'login':'server'); }
+    enterApp(data.username, data.role, data.profile);
+  } catch { clearToken(); showAuthStep(BACKEND_URL ? 'login' : 'server'); }
 })();
 </script>
 </body>
